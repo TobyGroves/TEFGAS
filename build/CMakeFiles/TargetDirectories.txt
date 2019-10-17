@@ -1,4 +1,4 @@
-C:/Projects/Uni/GameEngine/myengine/build/CMakeFiles/libs.dir
-C:/Projects/Uni/GameEngine/myengine/build/CMakeFiles/game.dir
-C:/Projects/Uni/GameEngine/myengine/build/CMakeFiles/ALL_BUILD.dir
-C:/Projects/Uni/GameEngine/myengine/build/CMakeFiles/ZERO_CHECK.dir
+C:/Projects/Uni/GameEngine/TEFGAS/build/CMakeFiles/Engine.dir
+C:/Projects/Uni/GameEngine/TEFGAS/build/CMakeFiles/game.dir
+C:/Projects/Uni/GameEngine/TEFGAS/build/CMakeFiles/ALL_BUILD.dir
+C:/Projects/Uni/GameEngine/TEFGAS/build/CMakeFiles/ZERO_CHECK.dir
