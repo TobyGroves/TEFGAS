@@ -22,9 +22,9 @@ namespace TEFGAS
 		std::weak_ptr<Entity> entity;
 		bool began;
 
-		virtual void onInit();
-		virtual void onBegin();
-		virtual void onTick();
+		virtual void Awake();
+		virtual void Start();
+		virtual void Update();
 		virtual void onDisplay();
 	};
 

@@ -5,9 +5,9 @@ namespace TEFGAS
 {
 
 	Component::~Component() {}
-	void Component::onInit() {}
-	void Component::onBegin() {}
-	void Component::onTick() {}
+	void Component::Awake() {}
+	void Component::Start() {}
+	void Component::Update() {}
 	void Component::onDisplay() {}
 
 	std::shared_ptr<Entity> Component::getEntity()

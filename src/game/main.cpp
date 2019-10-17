@@ -3,22 +3,22 @@
 #include <iostream>
 #include <string>
 
-class TestScreen : public TEFGAS::Component
+class Test : public TEFGAS::Component
 {
 public:
-	void onInit(std::string color)
+	void Awake(std::string color)
 	{
-		std::cout << "onInit " << color << std::endl;
+		std::cout << "I just woke up and feel " << color << std::endl;
 	}
 
-	void onBegin()
+	void Start()
 	{
-		std::cout << "onBegin" << std::endl;
+		std::cout << "ohhh yes we started" << std::endl;
 	}
 
-	void onTick()
+	void Update()
 	{
-		std::cout << "onTick" << std::endl;
+		std::cout << "oop its an update" << std::endl;
 
 		getCore()->stop();
 	}
@@ -28,9 +28,9 @@ int main()
 {
 	std::shared_ptr<TEFGAS::Core> c = TEFGAS::Core::initialize();
 	std::shared_ptr<TEFGAS::Entity> e = c->addEntity();
-	std::shared_ptr<TestScreen> t = e->addComponent<TestScreen>("Green");
+	std::shared_ptr<Test> t = e->addComponent<Test>("Puce");
 
 	c->start();
-
+	 
 	return 0;
 }

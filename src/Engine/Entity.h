@@ -22,7 +22,7 @@ namespace TEFGAS
 		std::shared_ptr<T> addComponent()
 		{
 			ADDCOMPONENT
-				rtn->onInit();
+				rtn->Awake();
 
 			return rtn;
 		}
@@ -31,7 +31,7 @@ namespace TEFGAS
 		std::shared_ptr<T> addComponent(A a)
 		{
 			ADDCOMPONENT
-				rtn->onInit(a);
+				rtn->Awake(a);
 
 			return rtn;
 		}
@@ -40,7 +40,7 @@ namespace TEFGAS
 		std::shared_ptr<T> addComponent(A a, B b)
 		{
 			ADDCOMPONENT
-				rtn->onInit(a, b);
+				rtn->Awake(a, b);
 
 			return rtn;
 		}
@@ -52,7 +52,7 @@ namespace TEFGAS
 		std::weak_ptr<Core> core;
 		std::vector<std::shared_ptr<Component> > components;
 
-		void tick();
+		void Update();
 		void display();
 
 	};

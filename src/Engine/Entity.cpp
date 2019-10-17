@@ -8,18 +8,18 @@ namespace TEFGAS
 		return core.lock();
 	}
 
-	void Entity::tick()
+	void Entity::Update()
 	{
 		for (std::vector<std::shared_ptr<Component> >::iterator it = components.begin();
 			it != components.end(); it++)
 		{
 			if (!(*it)->began)
 			{
-				(*it)->onBegin();
+				(*it)->Start();
 				(*it)->began = true;
 			}
 
-			(*it)->onTick();
+			(*it)->Update();
 		}
 	}
 

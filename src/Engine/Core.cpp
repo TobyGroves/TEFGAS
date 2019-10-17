@@ -21,7 +21,7 @@ namespace TEFGAS
 		{
 			for (std::vector<std::shared_ptr<Entity>>::iterator it = entities.begin(); it != entities.end(); it++)
 			{
-				(*it)->tick();
+				(*it)->Update();
 			}
 
 			for (std::vector<std::shared_ptr<Entity>>::iterator it = entities.begin(); it != entities.end(); it++)
