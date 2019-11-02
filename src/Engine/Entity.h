@@ -1,12 +1,9 @@
+#ifndef TEFGAS_ENTITY_H
+#define TEFGAS_ENTITY_H
+
 #include "Component.h"
 #include <memory>
-#include <vector>
-
-#define ADDCOMPONENT \
-  std::shared_ptr<T> rtn = std::make_shared<T>(); \
-  rtn->entity = self; \
-  rtn->began = false; \
-  components.push_back(rtn);
+#include <list>
 
 namespace TEFGAS
 {
@@ -15,46 +12,42 @@ namespace TEFGAS
 
 	class Entity
 	{
+	public:
 		friend class Core;
 
-	public:
-		template <typename T>
-		std::shared_ptr<T> addComponent()
-		{
-			ADDCOMPONENT
-				rtn->Awake();
+		std::shared_ptr<Core> getCore() const;
 
-			return rtn;
+		template <typename T, typename... A>
+		std::shared_ptr<T>addComponent(A...args)
+		{
+			std::shared_ptr<T> compo = std::make_shared<T>(args...);
+			compo->entity = self;
+			components.push_back(compo);
+
+			return compo;
 		}
 
-		template <typename T, typename A>
-		std::shared_ptr<T> addComponent(A a)
-		{
-			ADDCOMPONENT
-				rtn->Awake(a);
 
-			return rtn;
+		template<typename T>
+		std::shared_ptr<T> getComponent(){
+			for(auto & compo : components)
+			{
+				if(std::dynamic_pointer_cast<T>(compo)){
+					return compo;
+				}
+			}
+			return nullptr;
 		}
 
-		template <typename T, typename A, typename B>
-		std::shared_ptr<T> addComponent(A a, B b)
-		{
-			ADDCOMPONENT
-				rtn->Awake(a, b);
-
-			return rtn;
-		}
-
-		std::shared_ptr<Core> getCore();
+		void Update();
 
 	private:
 		std::weak_ptr<Entity> self;
 		std::weak_ptr<Core> core;
-		std::vector<std::shared_ptr<Component> > components;
-
-		void Update();
+		std::list<std::shared_ptr<Component> > components;
 		void display();
 
 	};
 
 }
+#endif

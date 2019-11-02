@@ -15,8 +15,8 @@ namespace TEFGAS
 
 	public:
 		virtual ~Component();
-		std::shared_ptr<Core> getCore();
-		std::shared_ptr<Entity> getEntity();
+		std::shared_ptr<Core> getCore() const;
+		std::shared_ptr<Entity> getEntity() const;
 
 	private:
 		std::weak_ptr<Entity> entity;

@@ -10,12 +10,12 @@ namespace TEFGAS
 	void Component::Update() {}
 	void Component::onDisplay() {}
 
-	std::shared_ptr<Entity> Component::getEntity()
+	std::shared_ptr<Entity> Component::getEntity() const
 	{
 		return entity.lock();
 	}
 
-	std::shared_ptr<Core> Component::getCore()
+	std::shared_ptr<Core> Component::getCore() const
 	{
 		return getEntity()->getCore();
 	}

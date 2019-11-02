@@ -3,34 +3,23 @@
 #include <iostream>
 #include <string>
 
-class Test : public TEFGAS::Component
-{
-public:
-	void Awake(std::string color)
-	{
-		std::cout << "I just woke up and feel " << color << std::endl;
-	}
-
-	void Start()
-	{
-		std::cout << "ohhh yes we started" << std::endl;
-	}
-
-	void Update()
-	{
-		std::cout << "oop its an update" << std::endl;
-
-		getCore()->stop();
-	}
-};
 
 int main()
 {
-	std::shared_ptr<TEFGAS::Core> c = TEFGAS::Core::initialize();
-	std::shared_ptr<TEFGAS::Entity> e = c->addEntity();
-	std::shared_ptr<Test> t = e->addComponent<Test>("Puce");
 
-	c->start();
-	 
-	return 0;
+  //Intt
+
+  std::shared_ptr<TEFGAS::Core> core = TEFGAS::Core::initialize(640,480,"Triangle!!!!!!!!!");
+
+  std::shared_ptr<TEFGAS::Entity> entity = core->addEntity();
+
+  std::shared_ptr<TEFGAS::RenderComponent> entityRenderer = entity->addComponent<TEFGAS::RenderComponent>();
+
+  entityRenderer->onDisplay();
+
+  core->start();
+
+  std::cout<<"finished"<<std::endl;
+
+  return 0;
 }

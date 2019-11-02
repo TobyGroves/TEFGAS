@@ -1,35 +1,25 @@
 #include "Entity.h"
+#include "Component.h"
 
 namespace TEFGAS
 {
 
-	std::shared_ptr<Core> Entity::getCore()
+	std::shared_ptr<Core> Entity::getCore() const
 	{
 		return core.lock();
 	}
 
 	void Entity::Update()
 	{
-		for (std::vector<std::shared_ptr<Component> >::iterator it = components.begin();
-			it != components.end(); it++)
+		for(auto& compo : components)
 		{
-			if (!(*it)->began)
-			{
-				(*it)->Start();
-				(*it)->began = true;
-			}
-
-			(*it)->Update();
+			compo->Update();
 		}
 	}
 
 	void Entity::display()
 	{
-		for (std::vector<std::shared_ptr<Component> >::iterator it = components.begin();
-			it != components.end(); it++)
-		{
-			(*it)->onDisplay();
-		}
+
 	}
 
 }

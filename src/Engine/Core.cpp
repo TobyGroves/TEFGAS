@@ -1,49 +1,66 @@
 #include "Core.h"
 #include "Entity.h"
+#include <GL/glew.h>
 
 namespace TEFGAS
 {
-	std::shared_ptr<Core> Core::initialize()
+	std::shared_ptr<Core> Core::initialize(int _windowWidth,int _windowHeight,std::string _gameName)
 	{
-		std::shared_ptr<Core> rtn = std::make_shared<Core>();
+		std::shared_ptr<Core> core = std::make_shared<Core>();
 
-		rtn->running = false;
-		rtn->self = rtn;
+		core->self = core;
 
-		return rtn;
+		SDL_CreateWindowAndRenderer(_windowWidth,_windowHeight, SDL_WINDOW_OPENGL, &core->window,&core->renderer);
+		SDL_SetWindowTitle(core->window,_gameName.c_str());
+
+		if(!SDL_GL_CreateContext(core->window)) // check that sdl started fine
+		{
+			throw std::exception();
+		}
+
+		if(glewInit() != GLEW_OK) // check that glew started ok
+		{
+			throw std::exception(); 
+		}
+		return core;
 	}
 
 	void Core::start()
 	{
-		running = true;
+		isRunning = true;
 
-		while (running)
+		while (isRunning)
 		{
-			for (std::vector<std::shared_ptr<Entity>>::iterator it = entities.begin(); it != entities.end(); it++)
-			{
-				(*it)->Update();
+
+			SDL_PollEvent(&event);
+			if(event.type == SDL_QUIT){
+				break;
 			}
 
-			for (std::vector<std::shared_ptr<Entity>>::iterator it = entities.begin(); it != entities.end(); it++)
+			for(auto& ent : entities)
 			{
-				(*it)->display();
+				ent->Update();
+			}
+			for(auto& ent : entities)
+			{
+				ent->display();
 			}
 		}
 	}
 
 	void Core::stop()
 	{
-		running = false;
+		isRunning = false;
 	}
 
 	std::shared_ptr<Entity> Core::addEntity()
 	{
-		std::shared_ptr<Entity> rtn = std::make_shared<Entity>();
-		entities.push_back(rtn);
-		rtn->self = rtn;
-		rtn->core = self;
+		std::shared_ptr<Entity> ent = std::make_shared<Entity>();
+		ent->self = ent;
+		ent->core = self;
+		entities.push_back(ent);
 
-		return rtn;
+		return ent;
 	}
 
 }

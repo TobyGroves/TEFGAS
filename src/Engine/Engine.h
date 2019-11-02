@@ -6,5 +6,6 @@
 #include "Component.h"
 #include "Environment.h"
 #include "Keyboard.h"
+#include "RenderComponent.h"
 
 #endif
