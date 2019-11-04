@@ -26,6 +26,14 @@ void VertexArray::setBuffer(std::string attribute, std::weak_ptr<VertexBuffer> b
   {
     buffers.at(1) = buffer.lock();
   }
+  else if(attribute == "in_TexCoord")
+  {
+    buffers.at(2) = buffer.lock();
+  }
+  else if(attribute == "in_Normal")
+  {
+    buffers.at(3) = buffer.lock();
+  }
   else
   {
     throw std::exception();

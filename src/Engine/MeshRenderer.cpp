@@ -8,6 +8,14 @@
 namespace TEFGAS
 {
 
+MeshRenderer::MeshRenderer(std::string _meshPath,std::string _vertShadPath,std::string _fragShadPath)
+{
+  meshPath = _meshPath;
+  vertShadPath = _vertShadPath;
+  fragShadPath = _fragShadPath;
+}
+
+
 void MeshRenderer::Awake()
 {
 std::cout<< "beginning of awake in mesh renderer"<<std::endl;
