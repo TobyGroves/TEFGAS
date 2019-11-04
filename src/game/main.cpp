@@ -14,7 +14,7 @@ int main()
 
   std::shared_ptr<TEFGAS::Entity> entity = core->addEntity();
 
-  std::shared_ptr<TEFGAS::MeshRenderer> mr = entity->addComponent<TEFGAS::MeshRenderer>();
+  //std::shared_ptr<TEFGAS::MeshRenderer> mr = entity->addComponent<TEFGAS::MeshRenderer>();
 
 try{
 

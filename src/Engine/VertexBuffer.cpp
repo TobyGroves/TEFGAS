@@ -12,6 +12,22 @@ namespace TEFGAS
             throw std::exception();
         }
     }
+    void VertexBuffer::add(glm::vec2 value)
+    {
+        if(!components)
+        {
+            components = 2;
+        }
+
+        if(components != 2)
+        {
+            throw std::exception();
+        }
+
+        data.push_back(value.x);
+        data.push_back(value.y);
+        dirty = true;
+    }
 
     void VertexBuffer::add(glm::vec3 value)
     {

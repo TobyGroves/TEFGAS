@@ -18,6 +18,10 @@ include_directories(${GLM_INCLUDE_DIRS})
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
+find_package(ASSIMP REQUIRED)
+include_directories(${ASSIMP_INCLUDE_DIRS})
+
+
 add_library(Engine
  	src/Engine/Core.cpp
  	src/Engine/Entity.cpp
@@ -34,4 +38,4 @@ add_library(Engine
 
 add_executable(game src/game/main.cpp)
 
-target_link_libraries(game Engine ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES})
+target_link_libraries(game Engine ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES} ${ASSIMP_LIBRARIES})

@@ -1,10 +1,18 @@
 #include <glm/glm.hpp>
 #include <string>
 #include <vector>
+#include <list>
+
+
 
 namespace TEFGAS{
+class ShaderProgram;
+class VertexArray;
+
 class Mesh
 {   
+    public:
+
     struct Vertex
     {
         glm::vec3 Position;
@@ -17,13 +25,13 @@ class Mesh
         std::string type;
     };
 
-    public:
-        /*mesh data*/
-        std::vector<Vertex> verticies;
-        std::vector<unsigned int> indices;
-        std::vector<Texture> textures;
-
+    
         /*functions*/
-        Mesh(std::vector<Vertex> _verticies, std::vector<unsigned int> _indices, std::vector<Texture> _textures);
+        Mesh(std::list<Vertex> _verticies, std::list<unsigned int> _indices, std::list<Texture> _textures);
+
+        void Draw (std::shared_ptr<ShaderProgram> _shader);
+
+        std::shared_ptr<VertexArray> shape;
+        std::shared_ptr<ShaderProgram> shader;
 };
 }
