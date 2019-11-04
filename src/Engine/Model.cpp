@@ -5,8 +5,10 @@
 
 namespace TEFGAS{
     class ShaderProgram;
-    void Model::onDisplay(std::shared_ptr<ShaderProgram> shader)
+    void Model::onDisplay()
     {
+        //std::cout<<"in display of model"<<std::endl;
+
         for(auto&mesh : meshes)
         {
             mesh.Draw(shader); 
@@ -25,11 +27,14 @@ namespace TEFGAS{
         }
         directory = path.substr(0,path.find_last_of('/'));
 
+        std::cout<<"Load model"<<std::endl;
+
         processNode(scene->mRootNode, scene);
     }
 
     void Model::processNode(aiNode *node, const aiScene *scene)
     {
+        std::cout<<"process node"<<std::endl;
         for(unsigned int i = 0; i < node->mNumMeshes; i++)
         {
             aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
@@ -44,13 +49,15 @@ namespace TEFGAS{
 
     Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     {
-        std::list<Mesh::Vertex> vertices;
-        std::list<unsigned int> indices;
-        std::list<Mesh::Texture>textures;
+        std::cout<<"process mesh"<<std::endl;
+
+        std::vector<Vertex> vertices;
+        std::vector<unsigned int> indices;
+        std::vector<Texture>textures;
 
         for(unsigned int i=0; i< mesh->mNumVertices;i++)
         {
-            Mesh::Vertex vertex;
+            Vertex vertex;
             // process vert location norm and texcoord
             glm::vec3 vector;
             vector.x = mesh->mVertices[i].x;
@@ -76,15 +83,6 @@ namespace TEFGAS{
             }
 
             vertices.push_back(vertex);
-
-            for(unsigned int i = 0; i<mesh->mNumFaces; i++)
-            {
-                aiFace face = mesh->mFaces[i];
-                for(unsigned int j =0;j<face.mNumIndices; j++)
-                {
-                    indices.push_back(face.mIndices[j]);
-                }
-            }
             
             //material bit check learn opengl  
 
@@ -92,12 +90,44 @@ namespace TEFGAS{
 
         // process indices
 
+        for(unsigned int i = 0; i<mesh->mNumFaces; i++)
+            {
+                aiFace face = mesh->mFaces[i];
+                for(unsigned int j =0;j<face.mNumIndices; j++)
+                {
+                    indices.push_back(face.mIndices[j]);
+                }
+            }
+
         //process material
         if(mesh->mMaterialIndex >= 0)
         {
 
+            aiMaterial *material = scene->mMaterials[mesh->mMaterialIndex];
+            std::vector<Texture> diffuseMaps = loadMaterialTextures(material,aiTextureType_DIFFUSE, "texture_diffuse");
+            textures.insert(textures.end(),diffuseMaps.begin(),diffuseMaps.end());
+            std::vector<Texture> specularMaps = loadMaterialTextures(material,aiTextureType_SPECULAR, "texture_specular");
+            textures.insert(textures.end(),specularMaps.begin(),specularMaps.end());
+            std::vector<Texture> normalMaps = loadMaterialTextures(material,aiTextureType_NORMALS, "texture_normal");
+            textures.insert(textures.end(),normalMaps.begin(),normalMaps.end());
+            std::cout<<"setting materials"<<std::endl;
         }
         return Mesh(vertices,indices,textures);
     }
 
+    std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
+    {
+        std::cout<<"Load texture material thing"<<std::endl;
+        std::vector<Texture> textures;
+        for(unsigned int i = 0; i< mat->GetTextureCount(type); i++)
+        {
+            std::cout<<"Load texture material thing loop "<<std::endl;
+            aiString str;
+            mat->GetTexture(type,i,&str);
+            Texture texture(str.C_Str());
+            texture.type = typeName;
+            textures.push_back(texture);
+        }
+        return textures;
+    }
 }

@@ -26,7 +26,6 @@ add_library(Engine
  	src/Engine/Core.cpp
  	src/Engine/Entity.cpp
  	src/Engine/Component.cpp
-	src/Engine/RenderComponent.cpp
 	src/Engine/Keyboard.cpp
 	src/Engine/Environment.cpp
     src/Engine/MeshRenderer.cpp
@@ -34,6 +33,10 @@ add_library(Engine
     src/Engine/VertexArray.cpp
     src/Engine/VertexBuffer.cpp
 	src/Engine/Exception.cpp
+	src/Engine/Model.cpp
+	src/Engine/Mesh.cpp
+	src/Engine/Texture.cpp
+	src/Engine/stb_image.cpp
 )
 
 add_executable(game src/game/main.cpp)

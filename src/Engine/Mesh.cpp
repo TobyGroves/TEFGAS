@@ -5,13 +5,13 @@
 #include "VertexBuffer.h"
 #include "ShaderProgram.h"
 
+
 namespace TEFGAS
 {
-    //https://learnopengl.com/index.php?p=Model-Loading/Mesh
 
-    Mesh::Mesh(std::list<Vertex> _verticies, std::list<unsigned int> _indices, std::list<Texture> _textures)
+    Mesh::Mesh(std::vector<Vertex> _verticies, std::vector<unsigned int> _indices, std::vector<Texture> _textures)
     {
-
+        textures = _textures;
         std::cout<< "beginning of awake in mesh renderer"<<std::endl;
 
         std::shared_ptr<VertexBuffer> positions = std::make_shared<VertexBuffer>();
@@ -25,15 +25,6 @@ namespace TEFGAS
 
         }
 
-        //positions->add(glm::vec3(0.0f, 0.5f, 0.0f));
-        //positions->add(glm::vec3(-0.5f, -0.5f, 0.0f));
-        //positions->add(glm::vec3(0.5f, -0.5f, 0.0f));
-
-        //std::shared_ptr<VertexBuffer> colors = std::make_shared<VertexBuffer>();
-        //colors->add(glm::vec4(1.0f, 0.0f, 0.0f, 1.0f));
-        //colors->add(glm::vec4(0.0f, 1.0f, 0.0f, 1.0f));
-        //colors->add(glm::vec4(0.0f, 0.0f, 1.0f, 1.0f));
-
         std::cout<< "colors added"<<std::endl;
 
         shape = std::make_shared<VertexArray>();
@@ -44,12 +35,38 @@ namespace TEFGAS
         shape->setBuffer("in_TexCoord", texcoords);
         shape->setBuffer("in_Normal",normals);
         std::cout<< "buffers set"<<std::endl;
-
     }
 
     void Mesh::Draw(std::shared_ptr<ShaderProgram> _shader){
+
+        std::cout<<"in Draw of mesh"<<std::endl;
+
         _shader->setUniform("in_Model", glm::mat4(1.0f));
         _shader->setUniform("in_Projection", glm::mat4(1.0f));
+
+        unsigned int diffuseNum = 1;
+        unsigned int specularNum = 1;
+        unsigned int normalNum = 1;
+        for(unsigned int i=0; i< textures.size(); i++)
+        {
+            std::string number;
+            std::string name = textures.at(i).type;
+            if(name == "texture_diffuse")
+            {
+                number = std::to_string(diffuseNum++);
+            }
+            else if (name == "texture_specular")
+            {
+                number = std::to_string(specularNum++);
+            }
+            else if (name == "texture_normal")
+            {
+                number = std::to_string(normalNum++);
+            }
+            std::string uniform ="material."+name+number;
+            _shader->setUniform(uniform,&textures[i]);
+        }
+
         _shader->draw(*shape);
     }
 }

@@ -14,6 +14,10 @@ int main()
 
   std::shared_ptr<TEFGAS::Entity> entity = core->addEntity();
 
+  std::shared_ptr<TEFGAS::ShaderProgram> shader = std::make_shared<TEFGAS::ShaderProgram>("../resources/shaders/modelLoading.vert","../resources/shaders/modelLoading.frag");
+
+  std::shared_ptr<TEFGAS::Model> c = entity->addComponent<TEFGAS::Model>("../resources/models/nanosuit/nanosuit.obj",shader);
+
   //std::shared_ptr<TEFGAS::MeshRenderer> mr = entity->addComponent<TEFGAS::MeshRenderer>();
 
 try{

@@ -6,8 +6,10 @@
 #include "Component.h"
 #include "Environment.h"
 #include "Keyboard.h"
-#include "RenderComponent.h"
 #include "MeshRenderer.h"
 #include "Exception.h"
+#include "Model.h"
+#include "Mesh.h"
+#include "ShaderProgram.h"
 
 #endif

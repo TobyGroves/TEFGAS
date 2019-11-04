@@ -37,7 +37,6 @@ namespace TEFGAS
 
 		while (isRunning)
 		{
-			std::cout<< "beginning of loop"<<std::endl;
 			SDL_PollEvent(&event);
 			if(event.type == SDL_QUIT){
 				break;
@@ -48,7 +47,6 @@ namespace TEFGAS
 				ent->Update();
 			}
 
-			std::cout<< "post update loop"<<std::endl;
 			glClearColor(0.0f,0.0f,0.5f,1.0f);
 			glClear(GL_COLOR_BUFFER_BIT);
 
@@ -58,8 +56,6 @@ namespace TEFGAS
 			}
 
 			SDL_GL_SwapWindow(window);
-
-			std::cout<< "end of loop"<<std::endl;
 		}
 	}
 
