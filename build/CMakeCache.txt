@@ -232,6 +232,9 @@ TEFGAS_BINARY_DIR:STATIC=/home/toby/projects/TEFGAS/build
 //Value Computed by CMake
 TEFGAS_SOURCE_DIR:STATIC=/home/toby/projects/TEFGAS
 
+//The directory containing a CMake configuration file for glm.
+glm_DIR:PATH=/usr/lib/cmake/glm
+
 
 ########################
 # INTERNAL cache entries

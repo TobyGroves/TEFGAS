@@ -1,11 +1,12 @@
 #include "Component.h"
 #include "Entity.h"
+#include <iostream>
 
 namespace TEFGAS
 {
 
 	Component::~Component() {}
-	void Component::Awake() {}
+	void Component::Awake() { std::cout<< "awake"<<std::endl;}
 	void Component::Start() {}
 	void Component::Update() {}
 	void Component::onDisplay() {}

@@ -25,8 +25,6 @@ namespace TEFGAS
 		bool isRunning = false;
 		std::list <std::shared_ptr<Entity>> entities;
 		std::weak_ptr<Core> self;
-		
-		
 		SDL_Renderer * renderer = nullptr;
 		SDL_Event event;
 

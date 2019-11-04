@@ -4,6 +4,7 @@
 #include <string>
 
 
+
 int main()
 {
 
@@ -13,16 +14,29 @@ int main()
 
   std::shared_ptr<TEFGAS::Entity> entity = core->addEntity();
 
-  std::shared_ptr<TEFGAS::RenderComponent> entityRenderer = entity->addComponent<TEFGAS::RenderComponent>();
+  std::shared_ptr<TEFGAS::MeshRenderer> mr = entity->addComponent<TEFGAS::MeshRenderer>();
 
-  entityRenderer->onDisplay();
+try{
 
   core->start();
 
-  std::cout<<"finished"<<std::endl;
+}
+catch(TEFGAS::Exception& e)
+{
+  std::cout<<"TEFGAS Exception: "<< e.what()<<std::endl;
+}
+catch(std::exception& e)
+{
+  std::cout<<"Exception: "<< e.what() << std::endl;
+}
+catch (...)
+{
+  std::cout<<"An unknown object was thrown" << std::endl;
+}
+
+std::cout<<"finished"<<std::endl;
 
 
-  // LOOK AT LAB 7
 
   return 0;
 }

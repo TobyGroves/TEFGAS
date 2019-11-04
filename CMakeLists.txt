@@ -12,6 +12,9 @@ include_directories(${SDL2_INCLUDE_DIRS})
 find_package(OpenGL REQUIRED)
 include_directories(${OPENGL_INCLUDE_DIRS})
 
+find_package(glm REQUIRED)
+include_directories(${GLM_INCLUDE_DIRS})
+
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
@@ -22,8 +25,13 @@ add_library(Engine
 	src/Engine/RenderComponent.cpp
 	src/Engine/Keyboard.cpp
 	src/Engine/Environment.cpp
+    src/Engine/MeshRenderer.cpp
+    src/Engine/ShaderProgram.cpp
+    src/Engine/VertexArray.cpp
+    src/Engine/VertexBuffer.cpp
+	src/Engine/Exception.cpp
 )
 
 add_executable(game src/game/main.cpp)
 
-target_link_libraries(game Engine ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY})
+target_link_libraries(game Engine ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES})

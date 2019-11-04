@@ -1,0 +1,62 @@
+[
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Core.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Core.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Core.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Entity.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Entity.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Entity.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Component.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Component.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Component.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/RenderComponent.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/RenderComponent.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/RenderComponent.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Keyboard.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Keyboard.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Keyboard.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Environment.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Environment.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Environment.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/MeshRenderer.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/MeshRenderer.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/MeshRenderer.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/ShaderProgram.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/ShaderProgram.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/ShaderProgram.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/VertexArray.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/VertexArray.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/VertexArray.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/VertexBuffer.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/VertexBuffer.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/VertexBuffer.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/Exception.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/Exception.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/Engine/Exception.cpp"
+},
+{
+  "directory": "/home/toby/projects/TEFGAS/build",
+  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/game.dir/src/game/main.cpp.o -c /home/toby/projects/TEFGAS/src/game/main.cpp",
+  "file": "/home/toby/projects/TEFGAS/src/game/main.cpp"
+}
+]

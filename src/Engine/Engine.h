@@ -7,5 +7,7 @@
 #include "Environment.h"
 #include "Keyboard.h"
 #include "RenderComponent.h"
+#include "MeshRenderer.h"
+#include "Exception.h"
 
 #endif
