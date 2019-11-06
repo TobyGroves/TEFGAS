@@ -17,6 +17,7 @@ namespace TEFGAS{
 
     void Model::LoadModel(std::string path)
     {
+        
         Assimp::Importer import;
         const aiScene *scene =import.ReadFile(path,aiProcess_Triangulate | aiProcess_FlipUVs);
 
@@ -27,14 +28,12 @@ namespace TEFGAS{
         }
         directory = path.substr(0,path.find_last_of('/'));
 
-        std::cout<<"Load model"<<std::endl;
 
         processNode(scene->mRootNode, scene);
     }
 
     void Model::processNode(aiNode *node, const aiScene *scene)
     {
-        std::cout<<"process node"<<std::endl;
         for(unsigned int i = 0; i < node->mNumMeshes; i++)
         {
             aiMesh *mesh = scene->mMeshes[node->mMeshes[i]];
@@ -49,7 +48,6 @@ namespace TEFGAS{
 
     Mesh Model::processMesh(aiMesh *mesh, const aiScene *scene)
     {
-        std::cout<<"process mesh"<<std::endl;
 
         std::vector<Vertex> vertices;
         std::vector<unsigned int> indices;
@@ -110,21 +108,20 @@ namespace TEFGAS{
             textures.insert(textures.end(),specularMaps.begin(),specularMaps.end());
             std::vector<Texture> normalMaps = loadMaterialTextures(material,aiTextureType_NORMALS, "texture_normal");
             textures.insert(textures.end(),normalMaps.begin(),normalMaps.end());
-            std::cout<<"setting materials"<<std::endl;
         }
         return Mesh(vertices,indices,textures);
     }
 
     std::vector<Texture> Model::loadMaterialTextures(aiMaterial *mat, aiTextureType type, std::string typeName)
     {
-        std::cout<<"Load texture material thing"<<std::endl;
         std::vector<Texture> textures;
         for(unsigned int i = 0; i< mat->GetTextureCount(type); i++)
         {
-            std::cout<<"Load texture material thing loop "<<std::endl;
+
             aiString str;
             mat->GetTexture(type,i,&str);
-            Texture texture(str.C_Str());
+            //std::cout<<"Load texture material thing loop from :"<<folderPath<<str.C_Str()<<std::endl;
+            Texture texture(folderPath+str.C_Str());
             texture.type = typeName;
             textures.push_back(texture);
         }

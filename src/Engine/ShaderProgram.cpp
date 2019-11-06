@@ -1,5 +1,6 @@
 #include "ShaderProgram.h"
 #include "VertexArray.h"
+#include "Texture.h"
 
 #include <glm/ext.hpp>
 
@@ -20,7 +21,7 @@ ShaderProgram::ShaderProgram(std::string vert, std::string frag)
   {
     throw std::exception();
   }
-std::cout<< "opened vertex shader"<<std::endl;
+  std::cout<< "opened vertex shader"<<std::endl;
   while(!file.eof())
   {
     std::string line;
@@ -73,6 +74,8 @@ std::cout<< "opened vertex shader"<<std::endl;
   glAttachShader(id, fragmentShaderId);
   glBindAttribLocation(id, 0, "in_Position");
   glBindAttribLocation(id, 1, "in_Color");
+  glBindAttribLocation(id, 2, "in_TexCoord");
+  glBindAttribLocation(id, 3, "in_Normal");
 
   if(glGetError() != GL_NO_ERROR)
   {
@@ -97,8 +100,28 @@ void ShaderProgram::draw(VertexArray& vertexArray)
 {
   glUseProgram(id);
   glBindVertexArray(vertexArray.getId());
+  
+  for (size_t i = 0;i<samplers.size();i++)
+  {
+    glActiveTexture(GL_TEXTURE0 +i);
 
+    if(samplers.at(i).texture)
+    {
+      glBindTexture(GL_TEXTURE_2D,samplers.at(i).texture->getId());
+    }
+    else
+    {
+      glBindTexture(GL_TEXTURE_2D,0);
+    }
+  }
+  
   glDrawArrays(GL_TRIANGLES, 0, vertexArray.getVertexCount());
+
+  for(size_t i = 0; i<samplers.size(); i++)
+  {
+    glActiveTexture(GL_TEXTURE0 +i);
+    glBindTexture(GL_TEXTURE_2D,0);
+  }
 
   glBindVertexArray(0);
   glUseProgram(0);
@@ -110,6 +133,7 @@ void ShaderProgram::setUniform(std::string uniform, glm::vec4 value)
 
   if(uniformId == -1)
   {
+  std::cout<<"failed vec4 uniform : "<<uniform<<std::endl;
     throw std::exception();
   }
 
@@ -124,6 +148,8 @@ void ShaderProgram::setUniform(std::string uniform, float value)
 
   if(uniformId == -1)
   {
+
+  std::cout<<"failed float uniform: "<<uniform<<std::endl;
     throw std::exception();
   }
 
@@ -134,10 +160,13 @@ void ShaderProgram::setUniform(std::string uniform, float value)
 
 void ShaderProgram::setUniform(std::string uniform, glm::mat4 value)
 {
-  GLint uniformId = glGetUniformLocation(id, uniform.c_str());
 
+  GLint uniformId = glGetUniformLocation(id, uniform.c_str());
+  
   if(uniformId == -1)
   {
+
+  std::cout<<"failed mat4 uniform: "<<uniform<<std::endl;
     throw std::exception();
   }
 
@@ -153,6 +182,8 @@ void ShaderProgram::setUniform(std::string uniform, glm::mat4 value)
 
     if(uniformId == -1)
     {
+
+  std::cout<<"failed texture uniform: "<<uniform<<std::endl;
       return;
     }
 

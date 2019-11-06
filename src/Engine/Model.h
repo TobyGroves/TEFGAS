@@ -18,10 +18,10 @@ namespace TEFGAS{
     class Model : public Component 
     {
     public:
-        Model(std::string path,std::shared_ptr<ShaderProgram> _shader)
+        Model(std::string _folderPath,std::string modelFile,std::shared_ptr<ShaderProgram> _shader)
         {
-            std::cout<<"in model constructor"<<std::endl;
-            LoadModel(path);
+            folderPath = _folderPath;
+            LoadModel(folderPath+modelFile);
             shader = _shader;
         }
 
@@ -31,7 +31,7 @@ namespace TEFGAS{
     /* model data*/
     std::list<Mesh> meshes;
     std::string directory;
-    
+    std::string folderPath;
 
     /*functions*/
     void LoadModel(std::string path);

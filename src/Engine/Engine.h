@@ -11,5 +11,7 @@
 #include "Model.h"
 #include "Mesh.h"
 #include "ShaderProgram.h"
+#include "Camera.h"
+#include "Transform.h"
 
 #endif

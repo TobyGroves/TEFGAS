@@ -37,6 +37,8 @@ add_library(Engine
 	src/Engine/Mesh.cpp
 	src/Engine/Texture.cpp
 	src/Engine/stb_image.cpp
+	src/Engine/Camera.cpp
+	src/Engine/Transform.cpp
 )
 
 add_executable(game src/game/main.cpp)

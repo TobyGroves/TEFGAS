@@ -4,6 +4,8 @@
 #include "VertexArray.h"
 #include "VertexBuffer.h"
 #include "ShaderProgram.h"
+#include <glm/glm.hpp>
+#include <glm/ext.hpp>
 
 
 namespace TEFGAS
@@ -12,7 +14,6 @@ namespace TEFGAS
     Mesh::Mesh(std::vector<Vertex> _verticies, std::vector<unsigned int> _indices, std::vector<Texture> _textures)
     {
         textures = _textures;
-        std::cout<< "beginning of awake in mesh renderer"<<std::endl;
 
         std::shared_ptr<VertexBuffer> positions = std::make_shared<VertexBuffer>();
         std::shared_ptr<VertexBuffer> texcoords = std::make_shared<VertexBuffer>();
@@ -20,29 +21,35 @@ namespace TEFGAS
         for(auto& vert : _verticies)
         {
             positions->add(vert.Position);
+
+            //std::cout<<"p:"<<vert.Position.x<<" "<<vert.Position.y<<" "<<vert.Position.y<<" ";
+
             texcoords->add(vert.TexCoords);
             normals->add(vert.Normal);
 
         }
-
-        std::cout<< "colors added"<<std::endl;
-
+        //std::cout<<std::endl;
         shape = std::make_shared<VertexArray>();
 
-        std::cout<< "made shared"<<std::endl;
-        shape->setBuffer("in_Position", positions);
+        shape->setBuffer("in_Position",positions);
         //shape->setBuffer("in_Color", colors);
-        shape->setBuffer("in_TexCoord", texcoords);
+        shape->setBuffer("in_TexCoord",texcoords);
         shape->setBuffer("in_Normal",normals);
-        std::cout<< "buffers set"<<std::endl;
+
     }
 
     void Mesh::Draw(std::shared_ptr<ShaderProgram> _shader){
 
-        std::cout<<"in Draw of mesh"<<std::endl;
 
-        _shader->setUniform("in_Model", glm::mat4(1.0f));
-        _shader->setUniform("in_Projection", glm::mat4(1.0f));
+
+        //_shader->setUniform("in_Projection", glm::mat4(1.0f));
+        
+        glm::mat4 model = glm::mat4(1.0f);
+
+        model = glm::translate(model,glm::vec3(0.0f,-1.75f,0.0f));
+        model = glm::scale(model,glm::vec3(0.2f,0.2f,0.2f));
+
+        _shader->setUniform("in_Model",model);
 
         unsigned int diffuseNum = 1;
         unsigned int specularNum = 1;
@@ -63,7 +70,7 @@ namespace TEFGAS
             {
                 number = std::to_string(normalNum++);
             }
-            std::string uniform ="material."+name+number;
+            std::string uniform =name+number;
             _shader->setUniform(uniform,&textures[i]);
         }
 
