@@ -10,90 +10,102 @@
 namespace TEFGAS
 {
 
-ShaderProgram::ShaderProgram(std::string vert, std::string frag)
+  void ShaderProgram::use()
+  {
+    glUseProgram(id);
+  }
+
+ShaderProgram::ShaderProgram(const char* vertexPath, const char* fragmentPath, const char* geometryPath)
 {
-  std::cout<< "started shad prog"<<std::endl;
-  std::ifstream file(vert.c_str());
-  std::string vertSrc;
 
-
-  if(!file.is_open())
-  {
-    throw std::exception();
-  }
-  std::cout<< "opened vertex shader"<<std::endl;
-  while(!file.eof())
-  {
-    std::string line;
-    std::getline(file, line);
-    vertSrc += line + "\n";
-  }
-
-  file.close();
-  file.open(frag.c_str());
-  std::string fragSrc;
-
-  if(!file.is_open())
-  {
-    throw std::exception();
-  }
-  std::cout<< "opened frag shader"<<std::endl;
-
-  while(!file.eof())
-  {
-    std::string line;
-    std::getline(file, line);
-    fragSrc += line + "\n";
-  }
-
-  const GLchar *vs = vertSrc.c_str();
-  GLuint vertexShaderId = glCreateShader(GL_VERTEX_SHADER);
-  glShaderSource(vertexShaderId, 1, &vs, NULL);
-  glCompileShader(vertexShaderId);
-  GLint success = 0;
-  glGetShaderiv(vertexShaderId, GL_COMPILE_STATUS, &success);
-
-  if(!success)
-  {
-    throw std::exception();
-  }
-
-  const GLchar *fs = fragSrc.c_str();
-  GLuint fragmentShaderId = glCreateShader(GL_FRAGMENT_SHADER);
-  glShaderSource(fragmentShaderId, 1, &fs, NULL);
-  glCompileShader(fragmentShaderId);
-  glGetShaderiv(fragmentShaderId, GL_COMPILE_STATUS, &success);
-
-  if(!success)
-  {
-    throw std::exception();
-  }
-
-  id = glCreateProgram();
-  glAttachShader(id, vertexShaderId);
-  glAttachShader(id, fragmentShaderId);
-  glBindAttribLocation(id, 0, "in_Position");
-  glBindAttribLocation(id, 1, "in_Color");
-  glBindAttribLocation(id, 2, "in_TexCoord");
-  glBindAttribLocation(id, 3, "in_Normal");
-
-  if(glGetError() != GL_NO_ERROR)
-  {
-    throw std::exception();
-  }
-
-  glLinkProgram(id);
-  glGetProgramiv(id, GL_LINK_STATUS, &success);
-
-  if(!success)
-  {
-    throw std::exception();
-  }
-
-  glDetachShader(id, vertexShaderId);
-  glDeleteShader(vertexShaderId);
-  glDetachShader(id, fragmentShaderId);
-  glDeleteShader(fragmentShaderId);
+  // 1. retrieve the vertex/fragment source code from filePath
+        std::string vertexCode;
+        std::string fragmentCode;
+        std::string geometryCode;
+        try 
+        {
+          std::ifstream vertFile(vertexPath);
+          if(!vertFile.is_open())
+          {
+            throw std::exception();
+          }
+          std::ifstream fragFile(fragmentPath);
+          if(!fragFile.is_open())
+          {
+            throw std::exception();
+          }
+          while(!vertFile.eof())
+          {
+            std::string vertLine;
+            std::getline(vertFile, vertLine);
+            vertexCode += vertLine + "\n";
+          }
+          while(!fragFile.eof())
+          {
+            std::string fragLine;
+            std::getline(fragFile, fragLine);
+            fragmentCode += fragLine + "\n";
+          }
+          vertFile.close();
+          fragFile.close();
+            // if geometry shader path is present, also load a geometry shader
+            if(geometryPath != nullptr)
+            {
+              std::ifstream geometryFile(geometryPath);
+              if(!geometryFile.is_open())
+              {
+                throw std::exception();
+              }
+              while(!geometryFile.eof())
+              {
+                std::string geometryLine;
+                std::getline(geometryFile, geometryLine);
+                geometryCode += geometryLine + "\n";
+              }
+                geometryFile.close();
+            }
+        }
+        catch (std::ifstream::failure e)
+        {
+            std::cout << "ERROR::SHADER::FILE_NOT_SUCCESFULLY_READ" << std::endl;
+        }
+        const char* vShaderCode = vertexCode.c_str();
+        const char * fShaderCode = fragmentCode.c_str();
+        // 2. compile shaders
+        unsigned int vertex, fragment;
+        // vertex shader
+        vertex = glCreateShader(GL_VERTEX_SHADER);
+        glShaderSource(vertex, 1, &vShaderCode, NULL);
+        glCompileShader(vertex);
+        //checkCompileErrors(vertex, "VERTEX");
+        // fragment Shader
+        fragment = glCreateShader(GL_FRAGMENT_SHADER);
+        glShaderSource(fragment, 1, &fShaderCode, NULL);
+        glCompileShader(fragment);
+        //checkCompileErrors(fragment, "FRAGMENT");
+        // if geometry shader is given, compile geometry shader
+        unsigned int geometry;
+        if(geometryPath != nullptr)
+        {
+            const char * gShaderCode = geometryCode.c_str();
+            geometry = glCreateShader(GL_GEOMETRY_SHADER);
+            glShaderSource(geometry, 1, &gShaderCode, NULL);
+            glCompileShader(geometry);
+            //checkCompileErrors(geometry, "GEOMETRY");
+        }
+        // shader Program
+        id = glCreateProgram();
+        glAttachShader(id, vertex);
+        glAttachShader(id, fragment);
+        if(geometryPath != nullptr)
+            glAttachShader(id, geometry);
+        glLinkProgram(id);
+        //checkCompileErrors(ID, "PROGRAM");
+        // delete the shaders as they're linked into our program now and no longer necessery
+        glDeleteShader(vertex);
+        glDeleteShader(fragment);
+        if(geometryPath != nullptr)
+            glDeleteShader(geometry);
 }
 
 void ShaderProgram::draw(VertexArray& vertexArray)
@@ -125,6 +137,7 @@ void ShaderProgram::draw(VertexArray& vertexArray)
 
   glBindVertexArray(0);
   glUseProgram(0);
+
 }
 
 void ShaderProgram::setUniform(std::string uniform, glm::vec4 value)
@@ -140,6 +153,11 @@ void ShaderProgram::setUniform(std::string uniform, glm::vec4 value)
   glUseProgram(id);
   glUniform4f(uniformId, value.x, value.y, value.z, value.w);
   glUseProgram(0);
+}
+
+void ShaderProgram::setFloat(const std::string &name,float value)
+{
+  glUniform1f(glGetUniformLocation(id,name.c_str()),value);
 }
 
 void ShaderProgram::setUniform(std::string uniform, float value)

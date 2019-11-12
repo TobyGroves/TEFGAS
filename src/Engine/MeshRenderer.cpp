@@ -51,7 +51,7 @@ void MeshRenderer::onDisplay()
 {
   shader->setUniform("in_Model", glm::mat4(1.0f));
   shader->setUniform("in_Projection", glm::mat4(1.0f));
-  shader->draw(*shape);
+  //shader->draw(*shape);
 }
 
 }

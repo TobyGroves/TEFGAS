@@ -120,7 +120,6 @@ namespace TEFGAS{
 
             aiString str;
             mat->GetTexture(type,i,&str);
-            //std::cout<<"Load texture material thing loop from :"<<folderPath<<str.C_Str()<<std::endl;
             Texture texture(folderPath+str.C_Str());
             texture.type = typeName;
             textures.push_back(texture);
