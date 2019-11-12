@@ -30,11 +30,13 @@ if(WIN32) # windows
     		contrib/msvc-2017-windows-x86/glew/include
     		contrib/msvc-2017-windows-x86/SDL2/include
 			contrib/glm
+			contrib/assimp-3.1.1/include
   	)
 
 	link_directories(
     		${CMAKE_SOURCE_DIR}/contrib/msvc-2017-windows-x86/SDL2/lib
     		${CMAKE_SOURCE_DIR}/contrib/msvc-2017-windows-x86/glew/lib
+			${CMAKE_SOURCE_DIR}/contrib/glm
   	)
 
 	target_link_libraries(Engine SDL2 glew32 opengl32 glm assimp)
