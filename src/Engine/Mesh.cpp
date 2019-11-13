@@ -17,34 +17,13 @@ namespace TEFGAS
         vertices = _vertices;
         indices = _indices;
 
-        /*std::shared_ptr<VertexBuffer> positions = std::make_shared<VertexBuffer>();
-        std::shared_ptr<VertexBuffer> texcoords = std::make_shared<VertexBuffer>();
-        std::shared_ptr<VertexBuffer> normals = std::make_shared<VertexBuffer>();
-        for(auto& vert : _vertices)
-        {
-            positions->add(vert.Position);
-
-            //std::cout<<"p:"<<vert.Position.x<<" "<<vert.Position.y<<" "<<vert.Position.y<<" ";
-
-            texcoords->add(vert.TexCoords);
-            normals->add(vert.Normal);
-
-        }
-        //std::cout<<std::endl;
-        
-        shape = std::make_shared<VertexArray>();
-
-        shape->setBuffer("in_Position",positions);
-        //shape->setBuffer("in_Color", colors);
-        shape->setBuffer("in_TexCoord",texcoords);
-        shape->setBuffer("in_Normal",normals);
-        */
         setupMesh();
 
     }
 
     void Mesh::setupMesh()
     {
+        std::cout<<"setting up mesh"<<std::endl;
         glGenVertexArrays(1, &VAO);
         glGenBuffers(1, &VBO);
         glGenBuffers(1, &EBO);
@@ -69,42 +48,16 @@ namespace TEFGAS
         glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (void*)offsetof(Vertex, TexCoords));
 
         glBindVertexArray(0);
+
+        std::cout<<"finished up mesh"<<std::endl;
         
     }
 
 
-    void Mesh::Draw(std::shared_ptr<ShaderProgram> _shader){
-
-
-
-        //_shader->setUniform("in_Projection", glm::mat4(1.0f));
+    void Mesh::Draw(std::shared_ptr<ShaderProgram> _shader)
+    {
         
-        /*
-
-        unsigned int diffuseNum = 1;
-        unsigned int specularNum = 1;
-        unsigned int normalNum = 1;
-        for(unsigned int i=0; i< textures.size(); i++)
-        {
-            std::string number;
-            std::string name = textures.at(i).type;
-            if(name == "texture_diffuse")
-            {
-                number = std::to_string(diffuseNum++);
-            }
-            else if (name == "texture_specular")
-            {
-                number = std::to_string(specularNum++);
-            }
-            else if (name == "texture_normal")
-            {
-                number = std::to_string(normalNum++);
-            }
-            std::string uniform =name+number;
-            _shader->setUniform(uniform,&textures[i]);
-        }
-
-        _shader->draw(*shape,textures.at(0).getId());*/
+        std::cout<<"in draw"<<std::endl;
     glm::mat4 model = glm::mat4(1.0f);
 
         model = glm::translate(model,glm::vec3(0.0f,-1.75f,0.0f));
@@ -112,11 +65,14 @@ namespace TEFGAS
 
         _shader->setUniform("in_Model",model);
 
+        std::cout<<"set uniform model"<<std::endl;
     unsigned int diffuseNr = 1;
     unsigned int specularNr = 1;
-    for(unsigned int i = 0; i < textures.size(); i++)
+    for(float i = 0; i < textures.size(); i++)
     {
         glActiveTexture(GL_TEXTURE0 + i); // activate proper texture unit before binding
+
+        std::cout<<"active texture"<<std::endl;
         // retrieve texture number (the N in diffuse_textureN)
         std::string number;
         std::string name = textures[i].type;
@@ -124,15 +80,29 @@ namespace TEFGAS
             number = std::to_string(diffuseNr++);
         else if(name == "texture_specular")
         number = std::to_string(specularNr++);
-        shader->setFloat(name + number,i);
+
+
+        std::cout<<"constructed string"<<std::endl;
+        shader->setUniform(name + number,i);
+
+        std::cout<<"set float uniform"<<std::endl;
         glBindTexture(GL_TEXTURE_2D, textures[i].getId());
+
+        std::cout<<"bound texture"<<std::endl;
     }
     glActiveTexture(GL_TEXTURE0);
 
+    std::cout<<"activated texture"<<std::endl;
     // draw mesh
     glBindVertexArray(VAO);
+
+        std::cout<<"bound VAO"<<std::endl;
     glDrawElements(GL_TRIANGLES, indices.size(), GL_UNSIGNED_INT, 0);
+
+        std::cout<<"Drew elements"<<std::endl;
     glBindVertexArray(0);
+
+        std::cout<<"finished draw"<<std::endl;
 
     }
 }

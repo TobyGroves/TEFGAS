@@ -15,6 +15,7 @@ add_library(Engine
     src/Engine/MeshRenderer.cpp
     src/Engine/ShaderProgram.cpp
     src/Engine/VertexBuffer.cpp
+    src/Engine/VertexArray.cpp
 	src/Engine/Exception.cpp
 	src/Engine/Model.cpp
 	src/Engine/Mesh.cpp

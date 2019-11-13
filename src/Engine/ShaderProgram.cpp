@@ -162,15 +162,21 @@ void ShaderProgram::setFloat(const std::string &name,float value)
 
 void ShaderProgram::setUniform(std::string uniform, float value)
 {
-  GLint uniformId = glGetUniformLocation(id, uniform.c_str());
+  std::cout<<"here with uniform : "<<uniform<<std::endl;
+  
+  //**************************************************************** this is the problem  VVVVVVV
 
+  GLint uniformId = glGetUniformLocation(id, uniform.c_str());
+  
+ //**********************************************************dont know the issue but its this line ^^^^^^
+  std::cout<<"here 2"<<std::endl;
   if(uniformId == -1)
   {
 
   std::cout<<"failed float uniform: "<<uniform<<std::endl;
     throw std::exception();
   }
-
+  std::cout<<"here3 "<<std::endl;
   glUseProgram(id);
   glUniform1f(uniformId, value);
   glUseProgram(0);

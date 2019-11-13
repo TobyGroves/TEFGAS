@@ -7,7 +7,7 @@ namespace TEFGAS{
     class ShaderProgram;
     void Model::onDisplay()
     {
-        //std::cout<<"in display of model"<<std::endl;
+        std::cout<<"in display of model"<<std::endl;
 
         for(auto&mesh : meshes)
         {
