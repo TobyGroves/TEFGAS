@@ -1,44 +1,44 @@
-#include <glm/glm.hpp>
-#include "Texture.h"
+#include "Component.h"
 #include <string>
-#include <vector>
-#include <list>
 #include <memory>
 
-
-
 namespace TEFGAS{
-class ShaderProgram;
-class VertexArray;
-class Texture;
 
-struct Vertex
-    {
-        glm::vec3 Position;
-        glm::vec3 Normal;
-        glm::vec2 TexCoords;
-    };
+    class Transform;
+    class Texture;
+    class VertexArray;
+    class VertexBuffer;
+    class RenderTexture;
+    class ShaderProgram;
 
-
-class Mesh
-{   
+    class Mesh : public Component {
     public:
+        Mesh(std::shared_ptr<Texture>_texture, std::shared_ptr<Texture>_normalMap, std::shared_ptr<VertexArray>_mesh, std::shared_ptr<Transform> _transform, float _shine, std::shared_ptr<ShaderProgram> _shader)
+        {
+            texture = _texture;
+	        normalMap = _normalMap;
+	        mesh = _mesh;
+	        transform = _transform;
+	        shader = _shader;
+	        shine = _shine;
+        };
+        std::shared_ptr<Transform> transform;
 
-        std::vector<Texture> textures;
-        std::vector<Vertex> vertices;
-        std::vector<unsigned int>indices;
+	    std::string tag;
 
-    
-        /*functions*/
-        Mesh(std::vector<Vertex> _vertices, std::vector<unsigned int> _indices, std::vector<Texture> _textures);
+        void onDisplay();
+        //void onDisplay(std::shared_ptr<RenderTexture> rendTex);
+        //void onDisplay(RenderTexture *renderTexture);
+        std::shared_ptr<VertexArray> mesh;
 
-        void Draw (std::shared_ptr<ShaderProgram> _shader);
-        
-        std::shared_ptr<VertexArray> shape;
-        std::shared_ptr<ShaderProgram> shader;
     private:
-        unsigned int VAO,VBO,EBO;
-        void setupMesh();
+    std::shared_ptr<ShaderProgram> shader;
+	//std::shared_ptr<Time> time;
 
-};
+	std::shared_ptr<Texture>texture;
+	std::shared_ptr<Texture>normalMap;
+	
+	float shine;
+
+    };
 }

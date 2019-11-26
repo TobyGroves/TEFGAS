@@ -1,3 +1,4 @@
+#version 120
 uniform mat4 in_Projection;
 uniform mat4 in_Model;
 

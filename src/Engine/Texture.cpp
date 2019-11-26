@@ -1,9 +1,10 @@
-#include "Texture.h"
+
 #define STB_IMAGE_IMPLEMENTATION
+#include "Texture.h"
 #include "stb_image.h"
-#include <iostream>
 
 namespace TEFGAS{
+
 Texture::Texture(int width, int height)
 {
 	size.x = width;
@@ -19,8 +20,6 @@ Texture::Texture(int width, int height)
 
 Texture::Texture(std::string path)
 {
-  std::cout<<"in texture constructor"<<std::endl;
-
   int w = 0;
   int h = 0;
   int channels = 0;
@@ -31,7 +30,7 @@ Texture::Texture(std::string path)
   {
     throw std::exception();
   }
-  std::cout<<"got texture data"<<std::endl;
+
   size.x = w;
   size.y = h;
 

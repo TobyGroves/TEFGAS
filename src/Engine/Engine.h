@@ -6,12 +6,13 @@
 #include "Component.h"
 #include "Environment.h"
 #include "Keyboard.h"
-#include "MeshRenderer.h"
 #include "Exception.h"
-#include "Model.h"
 #include "Mesh.h"
 #include "ShaderProgram.h"
 #include "Camera.h"
 #include "Transform.h"
+#include "Texture.h"
+#include "VertexArray.h"
+#include "RenderComponent.h"
 
 #endif

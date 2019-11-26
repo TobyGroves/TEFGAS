@@ -31,11 +31,6 @@
 },
 {
   "directory": "/home/toby/projects/TEFGAS/build",
-  "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/MeshRenderer.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/MeshRenderer.cpp",
-  "file": "/home/toby/projects/TEFGAS/src/Engine/MeshRenderer.cpp"
-},
-{
-  "directory": "/home/toby/projects/TEFGAS/build",
   "command": "/usr/bin/c++   -I/home/toby/projects/TEFGAS/src -I/usr/include/SDL2    -o CMakeFiles/Engine.dir/src/Engine/ShaderProgram.cpp.o -c /home/toby/projects/TEFGAS/src/Engine/ShaderProgram.cpp",
   "file": "/home/toby/projects/TEFGAS/src/Engine/ShaderProgram.cpp"
 },

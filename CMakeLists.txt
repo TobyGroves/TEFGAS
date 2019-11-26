@@ -12,12 +12,12 @@ add_library(Engine
  	src/Engine/Component.cpp
 	src/Engine/Keyboard.cpp
 	src/Engine/Environment.cpp
-    src/Engine/MeshRenderer.cpp
     src/Engine/ShaderProgram.cpp
     src/Engine/VertexBuffer.cpp
     src/Engine/VertexArray.cpp
+	src/Engine/RenderTexture.cpp
+	src/Engine/RenderComponent.cpp
 	src/Engine/Exception.cpp
-	src/Engine/Model.cpp
 	src/Engine/Mesh.cpp
 	src/Engine/Texture.cpp
 	src/Engine/stb_image.cpp
