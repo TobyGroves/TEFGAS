@@ -1,4 +1,4 @@
-#version 130
+#version 140
 uniform sampler2D in_Texture;
 
 //uniform sampler2D in_NormalMap;
@@ -10,9 +10,11 @@ uniform float in_shine;
 uniform mat4 in_View;
 uniform vec3 in_Ambient;
 
-varying vec2 ex_TexCoord;
-varying vec3 ex_Normal;
-varying vec3 ex_FragPos;
+in vec2 ex_TexCoord;
+in vec3 ex_Normal;
+in vec3 ex_FragPos;
+
+out vec4 outColor;
 
 void main()
 {
@@ -40,7 +42,7 @@ void main()
   vec3 lighting = diff +  in_Ambient ; //specular+
   
   //drawing to fragment
-  gl_FragColor = tex * vec4(lighting,1);
+  outColor = tex * vec4(lighting,1);
 
-   gl_FragColor = tex * vec4(lighting,1);
+   //gl_FragColor = tex * vec4(lighting,1);
 }

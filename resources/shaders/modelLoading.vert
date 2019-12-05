@@ -1,15 +1,15 @@
-#version 130
+#version 140
 uniform mat4 in_Projection;
 uniform mat4 in_View;
 uniform mat4 in_Model;
 
-attribute vec3 in_Position;
-attribute vec2 in_TexCoord;
-attribute vec3 in_Normal;
+in vec3 in_Position;
+in vec2 in_TexCoord;
+in vec3 in_Normal;
 
-varying vec2 ex_TexCoord;
-varying vec3 ex_FragPos;
-varying vec3 ex_Normal;
+out vec2 ex_TexCoord;
+out vec3 ex_FragPos;
+out vec3 ex_Normal;
 
 void main()
 {

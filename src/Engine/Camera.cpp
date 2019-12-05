@@ -22,9 +22,9 @@ Camera::Camera(std::vector<std::shared_ptr<ShaderProgram>> _shaders,std::shared_
 void Camera::Update()
 {
 
-	transform->setPosition(transform->getPosition() + glm::vec3(0.0,1.0,0.0));
-	transform->setRotation(transform->getRotation() + glm::vec3(0.0,10.0,0.0));
-
+	transform->setPosition((transform->getPosition() + glm::vec3(0.0,0.01,0.0)));
+	transform->setRotation((transform->getRotation() + glm::vec3(0.0,0.01,0.0)));
+	std::cout<<transform->getRotation().y<<std::endl;
 
 	glm::mat4 model(1.0f);
 	model = glm::translate(model, transform->getPosition());
