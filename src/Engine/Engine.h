@@ -13,6 +13,7 @@
 #include "Transform.h"
 #include "Texture.h"
 #include "VertexArray.h"
-#include "RenderComponent.h"
+#include "Time.h"
+#include "Material.h"
 
 #endif

@@ -5,26 +5,24 @@
 #include <glm/glm.hpp>
 
 #include <string>
-
-namespace TEFGAS{
-
-class RenderTexture;
-
-class Texture
+namespace TEFGAS
 {
-	friend class RenderTexture;
+	class RenderTexture;
 
-	GLuint id;
-	glm::vec2 size;
+	class Texture
+	{
+		friend class RenderTexture;
 
-	Texture(int width, int height);
+		GLuint id;
+		glm::vec2 size;
 
-public:
-  Texture(std::string path);
-  glm::vec2 getSize();
-  GLuint getId();
+		Texture(int width, int height);
 
-};
+	public:
+		Texture(std::string path);
+		glm::vec2 getSize();
+		GLuint getId();
+
+	};
 }
-
 #endif

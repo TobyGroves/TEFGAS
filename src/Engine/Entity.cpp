@@ -12,12 +12,12 @@ namespace TEFGAS
 	void Entity::Update()
 	{
 
-		for(auto& compo : components)
+		for (auto& compo : components)
 		{
 
-			if(!compo->began)
+			if (!compo->began)
 			{
-				
+
 				compo->Awake();
 				compo->began = true;
 			}
@@ -29,7 +29,7 @@ namespace TEFGAS
 
 	void Entity::display()
 	{
-for(auto& compo : components)
+		for (auto& compo : components)
 		{
 			compo->onDisplay();
 		}

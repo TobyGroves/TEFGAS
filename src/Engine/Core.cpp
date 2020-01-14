@@ -8,7 +8,7 @@
 
 namespace TEFGAS
 {
-	std::shared_ptr<Core> Core::initialize(int _windowWidth,int _windowHeight,std::string _gameName)
+	std::shared_ptr<Core> Core::initialize(int _windowWidth, int _windowHeight, std::string _gameName)
 	{
 		std::shared_ptr<Core> core = std::make_shared<Core>();
 
@@ -19,61 +19,102 @@ namespace TEFGAS
 			throw std::exception();
 		}
 
-		SDL_CreateWindowAndRenderer(_windowWidth,_windowHeight, SDL_WINDOW_OPENGL, &core->window,&core->renderer);
-		std::cout<< "created window"<<std::endl;
-		SDL_SetWindowTitle(core->window,_gameName.c_str());
-		std::cout<< "set title"<<std::endl;
+		SDL_CreateWindowAndRenderer(_windowWidth, _windowHeight, SDL_WINDOW_OPENGL, &core->window, &core->renderer);
+		std::cout << "created window" << std::endl;
+		SDL_SetWindowTitle(core->window, _gameName.c_str());
+		std::cout << "set title" << std::endl;
 
-		if(!SDL_GL_CreateContext(core->window)) // check that sdl started fine
+		if (!SDL_GL_CreateContext(core->window)) // check that sdl started fine
 		{
 			throw std::exception();
 		}
 
-		std::cout<< "sdl ok"<<std::endl;
+		std::cout << "sdl ok" << std::endl;
 
-		if(glewInit() != GLEW_OK) // check that glew started ok
+		if (glewInit() != GLEW_OK) // check that glew started ok
 		{
-			throw std::exception(); 
+			throw std::exception();
 		}
-		std::cout<< "glew ok"<<std::endl;
+		std::cout << "glew ok" << std::endl;
+
+		core->quit = false;
 		return core;
 	}
 
-	void Core::start()
+	void Core::start(std::vector<std::shared_ptr<ShaderProgram>> _shaders)
 	{
-		isRunning = true;
 
-		while (isRunning)
+		//shaderSetup();
+		shaders = _shaders;
+
+		//create camera
+		//mainCamera = new Camera(shaders, new Transform(glm::vec3(25.0f, 6.0f, -3.7f), glm::vec3(0, 90, 0), glm::vec3(1, 1, 1)));
+
+
+		time = std::shared_ptr<Time>(new Time());
+
+		//create time
+		time->gameStart();
+
+		// Start the Game Loop
+		while (!quit)
 		{
-			SDL_PollEvent(&event);
-			if(event.type == SDL_QUIT){
-				break;
+			SDL_Event event = { 0 };
+
+			while (SDL_PollEvent(&event))
+			{
+				if (event.type == SDL_QUIT)
+				{
+					quit = true;
+				}
+			}
+			// ultimatly menu thing but atm just quits
+			state = SDL_GetKeyboardState(NULL);
+			if (state[SDL_SCANCODE_ESCAPE])
+			{
+				quit = true;
 			}
 
+
 			SDL_GetWindowSize(window, &windowWidth, &windowHeight);
+			SDL_ShowCursor(SDL_DISABLE);
+			SDL_SetRelativeMouseMode(SDL_TRUE);
 			glEnable(GL_CULL_FACE);
 			glEnable(GL_DEPTH_TEST);
-			glClearColor(135.0f, 206.0f, 235.0f, 1.0f);
+			glViewport(0, 0, windowWidth, windowHeight);
+			glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-			for (int i = 0; i < shaders.size(); i++)///////////////////////////////////////////////////////////////
+			/*
+			* Draw with perspective projection matrix
+			*/
+			for (int i = 0; i < shaders.size(); i++)
 			{
 				shaders.at(i)->setUniform("in_Projection", glm::perspective(glm::radians(45.0f),
 					(float)windowWidth / (float)windowHeight, 0.1f, 1000.f));
-			}//////////////////////////////////////////////////////////////////////////////////////////////////////
+			}
 
-			for(auto& ent : entities)
+			//entity update loop and draw//
+
+			for (auto& ent : entities)
 			{
 				ent->Update();
 			}
 
-			for(auto& ent : entities)
+			for (auto& ent : entities)
 			{
 				ent->display();
 			}
 
+
 			SDL_GL_SwapWindow(window);
+
+			time->timeUpdate();
+
 		}
+
+		SDL_DestroyWindow(window);
+		SDL_Quit();
 	}
 
 	void Core::stop()

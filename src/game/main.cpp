@@ -4,58 +4,53 @@
 #include <string>
 #include <vector>
 
+#include "rotateymcboatface.h"
+#include "CameraController.h"
+#include "LightMover.h"
 
+
+
+TEFGAS::Core* newGame;
+std::vector<std::shared_ptr<TEFGAS::ShaderProgram>> shaders;
 
 int main()
 {
 
-  //Intt
+	std::shared_ptr<TEFGAS::Core> newGame = TEFGAS::Core::initialize(1800, 1000, "Becoming TEFGAS");
+	//newGame->initialize(1800, 1000, "Becoming TEFGAS");
 
-  std::shared_ptr<TEFGAS::Core> core = TEFGAS::Core::initialize(640,480,"Journey");
+	shaders.push_back(std::shared_ptr <TEFGAS::ShaderProgram>(new TEFGAS::ShaderProgram("../shaders/simple.vert", "../shaders/simple.frag")));
+	shaders.push_back(std::shared_ptr <TEFGAS::ShaderProgram>(new TEFGAS::ShaderProgram("../shaders/light.vert", "../shaders/light.frag")));
+	shaders.push_back(std::shared_ptr <TEFGAS::ShaderProgram>(new TEFGAS::ShaderProgram("../shaders/lightspecdiff.vert", "../shaders/lightspecdiff.frag")));
+	shaders.push_back(std::shared_ptr <TEFGAS::ShaderProgram>(new TEFGAS::ShaderProgram("../shaders/lightsdnorm.vert", "../shaders/lightsdnorm.frag")));
+	shaders.push_back(std::shared_ptr <TEFGAS::ShaderProgram>(new TEFGAS::ShaderProgram("../shaders/PBR.vert", "../shaders/PBR.frag")));
 
-  std::shared_ptr<TEFGAS::Entity> Object = core->addEntity();
+#pragma region Sphere define
+	std::shared_ptr<TEFGAS::Entity> Sphere = newGame->addEntity();
 
-  std::shared_ptr<TEFGAS::Entity> player = core->addEntity();
+	std::shared_ptr<TEFGAS::Material> sphereMat = Sphere->addComponent<TEFGAS::Material>(new TEFGAS::Texture("../assets/PBR/shipalbedo.png"),
+		new TEFGAS::Texture("../assets/PBR/shipnormal.png"), shaders.at(3));
+	std::shared_ptr <TEFGAS::Transform> sphereTrans = Sphere->addComponent<TEFGAS::Transform>(
+		glm::vec3(2.0f, 5.0f, -10.0f), glm::vec3(0, 0.0f, 0), glm::vec3(0.2f, 0.2f, 0.2f));
+	std::shared_ptr<TEFGAS::Mesh> sphereMesh = Sphere->addComponent<TEFGAS::Mesh>(sphereMat, new TEFGAS::VertexArray("../assets/PBR/sphere.obj"));
+	Sphere->addComponent<RotateyMcBoat>();
 
+#pragma endregion
 
-  std::vector<std::shared_ptr<TEFGAS::ShaderProgram>> shaders;
+	std::shared_ptr<TEFGAS::Entity> CamEnt = newGame->addEntity();
+	std::shared_ptr <TEFGAS::Transform> camtrans = CamEnt->addComponent<TEFGAS::Transform>(
+		glm::vec3(0.0f, 6.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	std::shared_ptr<TEFGAS::Camera> Cam = CamEnt->addComponent<TEFGAS::Camera>(shaders);
+	CamEnt->addComponent<CameraController>();
 
-  core->shaders.push_back(std::make_shared<TEFGAS::ShaderProgram>("../resources/shaders/simple.vert","../resources/shaders/simple.frag"));
-
-  std::shared_ptr<TEFGAS::Transform> playerTrans = player->addComponent<TEFGAS::Transform>();
-  playerTrans->setPosition(glm::vec3(0.0f,0.0f,0.0f));
-  //must be vector of shaders
-
-
-  std::shared_ptr<TEFGAS::Camera> cam = player->addComponent<TEFGAS::Camera>(shaders,playerTrans);
-  Object->addComponent<TEFGAS::Transform>();
-  std::shared_ptr<TEFGAS::Texture> albedo = std::make_shared<TEFGAS::Texture>("../resources/models/Graveyard/graveyard.png");
-  std::shared_ptr<TEFGAS::Texture> normal = std::make_shared<TEFGAS::Texture>("../resources/models/Graveyard/graveyard.png");
-  std::shared_ptr<TEFGAS::VertexArray> vertArray = std::make_shared<TEFGAS::VertexArray>("../resources/models/Graveyard/graveyard.obj");
-  std::shared_ptr<TEFGAS::Transform> trans =  std::make_shared<TEFGAS::Transform>(glm::vec3(0,-10,0),glm::vec3(0,0,0),glm::vec3(100,100,100));
-  std::shared_ptr<TEFGAS::Mesh> mesh = Object->addComponent<TEFGAS::Mesh>(albedo,normal,vertArray,trans,0.5f,core->shaders.at(0));
-
-try{
-
-  core->start();
-
-}
-catch(TEFGAS::Exception& e)
-{
-  std::cout<<"TEFGAS Exception: "<< e.what()<<std::endl;
-}
-catch(std::exception& e)
-{
-  std::cout<<"Exception: "<< e.what() << std::endl;
-}
-catch (...)
-{
-  std::cout<<"An unknown object was thrown" << std::endl;
-}
-
-std::cout<<"finished"<<std::endl;
+	newGame->light = newGame->addEntity();
+	std::shared_ptr <TEFGAS::Transform> lighttrans = newGame->light->addComponent<TEFGAS::Transform>(
+		glm::vec3(0.0f, 5.0f, 0.0f), glm::vec3(0, 0, 0), glm::vec3(1, 1, 1));
+	newGame->light->addComponent<LightMover>();
 
 
 
-  return 0;
+	newGame->start(shaders);
+
+	return 0;
 }

@@ -1,33 +1,32 @@
+#ifndef TEFGAS_CAMERA_H
+#define TEFGAS_CAMERA_H
 #include <SDL2/SDL.h>
 #include <GL/glew.h>
 #include <glm/ext.hpp>
 #include <vector>
 #include <exception>
 #include <memory>
-#include <glm/glm.hpp>
-#include <glm/gtc/matrix_transform.hpp> 
+#include <GLM/glm.hpp>
+#include <GLM/gtc/matrix_transform.hpp> 
 
 #include "Component.h"
-
-namespace TEFGAS{
-class Transform;
-class ShaderProgram;
-
-class Camera : public Component
+namespace TEFGAS
 {
-public:
+	class ShaderProgram;
+	class Transform;
 
-    Camera(std::vector<std::shared_ptr<ShaderProgram>> _shaders,std::shared_ptr<Transform>_transform);
+	class Camera : public Component
+	{
+	public:
+		void Awake(std::vector<std::shared_ptr<ShaderProgram>> _shaders);
 
-    void Update() override;
+		void Update();
 
-private:
-    std::shared_ptr<Transform> transform;
+		std::shared_ptr <Transform> transform;
 
-    std::vector<std::shared_ptr<ShaderProgram>> shaders;
-
+		std::vector<std::shared_ptr<ShaderProgram>> shaders;
 
 
-};
-
+	};
 }
+#endif

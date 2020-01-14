@@ -4,48 +4,46 @@
 #include <string>
 #include <vector>
 #include <memory>
-
-namespace TEFGAS{
-  
-
-class VertexArray;
-class Texture;
-class RenderTexture;
-
-struct Sampler
+namespace TEFGAS
 {
-  GLint id;
-  Texture *texture;
-};
+	class VertexArray;
+	class Texture;
+	class RenderTexture;
+	class Skybox;
 
-class ShaderProgram
-{
-  GLuint id;
-  std::vector<Sampler> samplers;
-  glm::vec4 viewport;
-  
+	struct Sampler
+	{
+		GLint id;
+		Texture* texture;
+	};
 
-  std::shared_ptr<VertexArray>simpleShape;
+	class ShaderProgram
+	{
+		GLuint id;
+		std::vector<Sampler> samplers;
+		glm::vec4 viewport;
+		VertexArray* simpleShape;
 
-public:
-  ShaderProgram(std::string vert, std::string frag);
-  void draw();
-  void draw(RenderTexture *renderTexture);
-  void draw(std::shared_ptr<VertexArray> vertexArray);
-  void draw(std::shared_ptr<RenderTexture> renderTexture);
-  void draw(RenderTexture *renderTexture, VertexArray *vertexArray);
-  void draw(std::shared_ptr<RenderTexture>renderTexture, VertexArray *vertexArray);
-  void setUniform(std::string uniform, glm::vec3 value);
-  void setUniform(std::string uniform, glm::vec4 value);
-  void setUniform(std::string uniform, float value);
-  void setUniform(std::string uniform, glm::mat4 value);
-  void setUniform(std::string uniform, Texture *texture);
-  void setUniform(std::string uniform, std::shared_ptr<Texture> texture);
+	public:
+		ShaderProgram(std::string vert, std::string frag);
+		void draw();
+		void draw(RenderTexture* renderTexture);
+		void draw(VertexArray* vertexArray);
+		void draw(std::shared_ptr<RenderTexture> renderTexture);
+		void draw(RenderTexture* renderTexture, VertexArray* vertexArray);
+		void draw(std::shared_ptr<RenderTexture>renderTexture, VertexArray* vertexArray);
+		void setUniform(std::string uniform, glm::vec3 value);
+		void setUniform(std::string uniform, glm::vec4 value);
+		void setUniform(std::string uniform, float value);
+		void setUniform(std::string uniform, glm::mat4 value);
+		void setUniform(std::string uniform, Texture* texture);
+		void setUniform(std::string uniform, std::shared_ptr<Texture> texture);
+		void setUniform(std::string uniform, int value);
 
-  GLuint getId();
-  void setViewport(glm::vec4 viewPort);
-  void printShaderInfoLog(GLuint obj);
-  void printProgramInfoLog(GLuint obj);
+		GLuint getId();
+		void setViewport(glm::vec4 viewPort);
+		void printShaderInfoLog(GLuint obj);
+		void printProgramInfoLog(GLuint obj);
 
-};
+	};
 }

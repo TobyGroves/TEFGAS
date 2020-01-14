@@ -1,16 +1,15 @@
 #include "Texture.h"
-
-namespace TEFGAS{
-
-class RenderTexture : public Texture
+namespace TEFGAS
 {
-	GLuint fbo;
+	class RenderTexture : public Texture
+	{
+		GLuint fbo;
 
-public:
-	RenderTexture(int width, int height);
+	public:
+		RenderTexture(int width, int height);
 
-	GLuint getFbId();
-	void clear();
+		GLuint getFbId();
+		void clear();
 
-};
+	};
 }

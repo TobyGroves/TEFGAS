@@ -1,44 +1,41 @@
-#include "Component.h"
 #include <string>
 #include <memory>
+#include "Time.h"
+#include "Component.h"
+namespace TEFGAS
+{
+	class ShaderProgram;
+	class Transform;
+	class Texture;
+	class VertexArray;
+	class VertexBuffer;
+	class RenderTexture;
+	class Material;
 
-namespace TEFGAS{
+	class Mesh : public Component
+	{
+	public:
+		//Mesh(Texture* _texture, Texture* _normalMap, VertexArray* _mesh, Transform* _transform, float _shine, std::shared_ptr<ShaderProgram> _shader);
+		//Mesh(std::shared_ptr <Material> _material, VertexArray* _mesh);
 
-    class Transform;
-    class Texture;
-    class VertexArray;
-    class VertexBuffer;
-    class RenderTexture;
-    class ShaderProgram;
+		std::shared_ptr <Transform> transform;
 
-    class Mesh : public Component {
-    public:
-        Mesh(std::shared_ptr<Texture>_texture, std::shared_ptr<Texture>_normalMap, std::shared_ptr<VertexArray>_mesh, std::shared_ptr<Transform> _transform, float _shine, std::shared_ptr<ShaderProgram> _shader)
-        {
-            texture = _texture;
-	        normalMap = _normalMap;
-	        mesh = _mesh;
-	        transform = _transform;
-	        shader = _shader;
-	        shine = _shine;
-        };
-        std::shared_ptr<Transform> transform;
+		std::string tag;
 
-	    std::string tag;
+		void Awake(std::shared_ptr <Material> _material, VertexArray* _mesh);
+		void onDisplay();
+		void draw(std::shared_ptr<RenderTexture> rendTex);
+		VertexArray* mesh;
+	private:
+		std::shared_ptr<ShaderProgram> shader;
 
-        void onDisplay();
-        //void onDisplay(std::shared_ptr<RenderTexture> rendTex);
-        //void onDisplay(RenderTexture *renderTexture);
-        std::shared_ptr<VertexArray> mesh;
+		Texture* texture;
+		Texture* normalMap;
 
-    private:
-    std::shared_ptr<ShaderProgram> shader;
-	//std::shared_ptr<Time> time;
+		std::shared_ptr<Material> material;
 
-	std::shared_ptr<Texture>texture;
-	std::shared_ptr<Texture>normalMap;
-	
-	float shine;
+		float shine;
 
-    };
+
+	};
 }

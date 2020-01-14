@@ -12,7 +12,7 @@ namespace TEFGAS
 	class Component
 	{
 		friend class Entity;
-
+		friend class Core;
 	public:
 		virtual ~Component();
 		std::shared_ptr<Core> getCore() const;

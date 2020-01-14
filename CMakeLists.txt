@@ -6,7 +6,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 include_directories(src)
 
-add_library(Engine
+add_library(TEFGAS
  	src/Engine/Core.cpp
  	src/Engine/Entity.cpp
  	src/Engine/Component.cpp
@@ -23,24 +23,24 @@ add_library(Engine
 	src/Engine/stb_image.cpp
 	src/Engine/Camera.cpp
 	src/Engine/Transform.cpp
+	src/Engine/Material.cpp
+	src/Engine/Time.cpp
 )
 
 if(WIN32) # windows
 
 	include_directories(
-    		contrib/msvc-2017-windows-x86/glew/include
-    		contrib/msvc-2017-windows-x86/SDL2/include
-			contrib/glm
-			contrib/assimp-3.1.1/include
-  	)
+	contrib/glm
+	contrib/msvc-windows-x86/glew/include
+	contrib/msvc-windows-x86/SDL2/include
+)
 
 	link_directories(
-    		${CMAKE_SOURCE_DIR}/contrib/msvc-2017-windows-x86/SDL2/lib
-    		${CMAKE_SOURCE_DIR}/contrib/msvc-2017-windows-x86/glew/lib
-			${CMAKE_SOURCE_DIR}/contrib/glm
-  	)
+	${CMAKE_SOURCE_DIR}/msvc-windows-x86/contrib/glew/lib
+	${CMAKE_SOURCE_DIR}/msvc-windows-x86/contrib/SDL2/lib
+)
 
-	target_link_libraries(Engine SDL2 glew32 opengl32 glm assimp)
+	target_link_libraries(TEFGAS SDL2 opengl32 glew32)
 
 
 else() # linux
@@ -57,14 +57,10 @@ include_directories(${GLM_INCLUDE_DIRS})
 find_package(GLEW REQUIRED)
 include_directories(${GLEW_INCLUDE_DIRS})
 
-find_package(ASSIMP REQUIRED)
-include_directories(${ASSIMP_INCLUDE_DIRS})
-
-target_link_libraries(Engine ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES} ${ASSIMP_LIBRARIES})
+target_link_libraries(TEFGAS ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES})
 
 endif()
 
+add_executable(game src/game/main.cpp src/game/CameraController.cpp src/game/LightMover.cpp src/game/Rotateymcboatface.cpp)
 
-add_executable(game src/game/main.cpp)
-
-target_link_libraries(game Engine)
+target_link_libraries(game TEFGAS)
