@@ -15,5 +15,6 @@
 #include "VertexArray.h"
 #include "Time.h"
 #include "Material.h"
+#include "Sound.h"
 
 #endif

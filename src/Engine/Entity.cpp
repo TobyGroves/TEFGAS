@@ -15,17 +15,28 @@ namespace TEFGAS
 		for (auto& compo : components)
 		{
 
-			if (!compo->began)
-			{
-
-				compo->Awake();
-				compo->began = true;
-			}
+			//if (!compo->began)
+			//{
+			//
+			//	compo->Awake();
+			//	compo->began = true;
+			//}
 
 
 			compo->Update();
 		}
 	}
+
+	void Entity::Start()
+	{
+
+		for (auto& compo : components)
+		{
+
+			compo->Start();
+		}
+	}
+
 
 	void Entity::display()
 	{

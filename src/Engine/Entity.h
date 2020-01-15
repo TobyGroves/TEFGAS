@@ -68,7 +68,7 @@ namespace TEFGAS
 				}
 			}
 		}*/
-
+		void Start();
 		void Update();
 		void display();
 	private:

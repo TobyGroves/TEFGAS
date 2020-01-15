@@ -3,10 +3,12 @@
 #include <memory>
 #include <list>
 #include <SDL2/SDL.h>
+#include <AL/al.h>
+#include <AL/alc.h>
+
 #undef main
 #include <vector>
 #include <string>
-#include "Time.h"
 
 
 namespace TEFGAS
@@ -17,6 +19,7 @@ namespace TEFGAS
 	class ShaderProgram;
 	class Entity;
 	class Mesh;
+	class Time;
 
 	class Core
 	{
@@ -48,6 +51,9 @@ namespace TEFGAS
 		SDL_Renderer* renderer = nullptr;
 		SDL_Event event;
 		int windowWidth, windowHeight;
+
+		ALCdevice* device;
+		ALCcontext* context;
 
 	};
 

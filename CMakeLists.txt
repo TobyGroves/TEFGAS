@@ -21,45 +21,28 @@ add_library(TEFGAS
 	src/Engine/Mesh.cpp
 	src/Engine/Texture.cpp
 	src/Engine/stb_image.cpp
+	src/Engine/stb_vorbis.cpp
 	src/Engine/Camera.cpp
 	src/Engine/Transform.cpp
 	src/Engine/Material.cpp
 	src/Engine/Time.cpp
+	src/Engine/Sound.cpp
 )
-
-if(WIN32) # windows
 
 	include_directories(
 	contrib/glm
 	contrib/msvc-windows-x86/glew/include
 	contrib/msvc-windows-x86/SDL2/include
+	contrib/msvc-windows-x86/openal-soft/include
 )
 
 	link_directories(
 	${CMAKE_SOURCE_DIR}/msvc-windows-x86/contrib/glew/lib
 	${CMAKE_SOURCE_DIR}/msvc-windows-x86/contrib/SDL2/lib
+	${CMAKE_SOURCE_DIR}/msvc-windows-x86/contrib/openal-soft/lib
 )
 
-	target_link_libraries(TEFGAS SDL2 opengl32 glew32)
-
-
-else() # linux
-
-find_package(SDL2 REQUIRED)
-include_directories(${SDL2_INCLUDE_DIRS})
-
-find_package(OpenGL REQUIRED)
-include_directories(${OPENGL_INCLUDE_DIRS})
-
-find_package(glm REQUIRED)
-include_directories(${GLM_INCLUDE_DIRS})
-
-find_package(GLEW REQUIRED)
-include_directories(${GLEW_INCLUDE_DIRS})
-
-target_link_libraries(TEFGAS ${SDL2_LIBRARIES} ${GLEW_LIBRARIES} ${OPENGL_LIBRARY} ${GLM_LIBRARIES})
-
-endif()
+	target_link_libraries(TEFGAS SDL2 opengl32 glew32 OpenAL32)
 
 add_executable(game src/game/main.cpp src/game/CameraController.cpp src/game/LightMover.cpp src/game/Rotateymcboatface.cpp)
 

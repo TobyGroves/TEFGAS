@@ -1,5 +1,6 @@
 #include "Core.h"
 #include "Entity.h"
+#include "Time.h"
 #include <GL/glew.h>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -37,6 +38,32 @@ namespace TEFGAS
 		}
 		std::cout << "glew ok" << std::endl;
 
+
+		ALCdevice* device = alcOpenDevice(NULL);
+
+		if (device == NULL)
+		{
+			throw std::exception();
+		}
+
+		// Create audio context
+		ALCcontext* context = alcCreateContext(device, NULL);
+
+		if (context == NULL)
+		{
+			alcCloseDevice(device);
+			throw std::exception();
+		}
+
+		// Set as current context
+		if (!alcMakeContextCurrent(context))
+		{
+			alcDestroyContext(context);
+			alcCloseDevice(device);
+			throw std::exception();
+		}
+		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
+
 		core->quit = false;
 		return core;
 	}
@@ -55,6 +82,12 @@ namespace TEFGAS
 
 		//create time
 		time->gameStart();
+
+		for (auto& ent : entities)
+		{
+			ent->Start();
+		}
+
 
 		// Start the Game Loop
 		while (!quit)
@@ -112,6 +145,9 @@ namespace TEFGAS
 			time->timeUpdate();
 
 		}
+		alcMakeContextCurrent(NULL);
+		alcDestroyContext(context);
+		alcCloseDevice(device);
 
 		SDL_DestroyWindow(window);
 		SDL_Quit();
