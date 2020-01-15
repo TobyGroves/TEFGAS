@@ -71,6 +71,7 @@ namespace TEFGAS
 		void Start();
 		void Update();
 		void display();
+		~Entity();
 	private:
 		std::weak_ptr<Entity> self;
 		std::weak_ptr<Core> core;

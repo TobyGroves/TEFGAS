@@ -25,6 +25,7 @@ namespace TEFGAS
 		ALuint getID();
 
 		void play();
+		void stop();
 		void Update();
 		void Start(); // make it play the thing once the engine has started before the loop 
 	};

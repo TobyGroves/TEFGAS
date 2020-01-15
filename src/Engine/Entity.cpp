@@ -46,4 +46,12 @@ namespace TEFGAS
 		}
 	}
 
+	Entity::~Entity()
+	{
+		for (auto& compo : components)
+		{
+			compo->~Component();
+		}
+	}
+
 }

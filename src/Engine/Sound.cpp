@@ -30,14 +30,18 @@ namespace TEFGAS
 
 	void Sound::play()
 	{
-
-		std::cout << "spice girls" << std::endl;
 		SourceID = 0;
 		alGenSources(1, &SourceID);
 
 		alSource3f(SourceID, AL_POSITION, 0.0f, 0.0f, 0.0f);
 		alSourcei(SourceID, AL_BUFFER, BufferID);
 		alSourcePlay(SourceID);
+	}
+
+	void Sound::stop()
+	{
+		ALint state = 0;
+		alDeleteSources(1, &SourceID);
 	}
 
 	void Sound::Update()

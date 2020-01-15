@@ -145,6 +145,12 @@ namespace TEFGAS
 			time->timeUpdate();
 
 		}
+
+		for (auto& ent : entities)
+		{
+			ent->~Entity();
+		}
+
 		alcMakeContextCurrent(NULL);
 		alcDestroyContext(context);
 		alcCloseDevice(device);
