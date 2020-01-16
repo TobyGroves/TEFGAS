@@ -1,6 +1,8 @@
 #include "Core.h"
 #include "Entity.h"
 #include "Time.h"
+#include "Input.h"
+#include "Mouse.h"
 #include <GL/glew.h>
 #include <iostream>
 #include <glm/glm.hpp>
@@ -65,6 +67,8 @@ namespace TEFGAS
 		alListener3f(AL_POSITION, 0.0f, 0.0f, 0.0f);
 
 		core->quit = false;
+
+		core->input = std::make_shared <Input>();
 		return core;
 	}
 
@@ -93,15 +97,9 @@ namespace TEFGAS
 		while (!quit)
 		{
 			SDL_Event event = { 0 };
-
-			while (SDL_PollEvent(&event))
-			{
-				if (event.type == SDL_QUIT)
-				{
-					quit = true;
-				}
-			}
-			// ultimatly menu thing but atm just quits
+			SDL_SetRelativeMouseMode(SDL_TRUE);
+			input->manageInput(&event);
+			//just quits
 			state = SDL_GetKeyboardState(NULL);
 			if (state[SDL_SCANCODE_ESCAPE])
 			{
@@ -110,8 +108,6 @@ namespace TEFGAS
 
 
 			SDL_GetWindowSize(window, &windowWidth, &windowHeight);
-			SDL_ShowCursor(SDL_DISABLE);
-			SDL_SetRelativeMouseMode(SDL_TRUE);
 			glEnable(GL_CULL_FACE);
 			glEnable(GL_DEPTH_TEST);
 			glViewport(0, 0, windowWidth, windowHeight);
@@ -139,10 +135,11 @@ namespace TEFGAS
 				ent->display();
 			}
 
+			time->timeUpdate();
 
 			SDL_GL_SwapWindow(window);
 
-			time->timeUpdate();
+			
 
 		}
 

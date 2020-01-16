@@ -9,38 +9,39 @@ namespace TEFGAS
 {
 
 	class Core;
-
 	class Entity
 	{
 	public:
 		friend class Core;
 		friend class Component;
 
+		/// gets the core.
+		/** returns a pointer the the engine's core.*/
 		std::shared_ptr<Core> getCore() const;
 
-		//Add Component to the game object
+		/// add component.
+		/** This allows the user to add any component engine defined or not to the entity.
+		It automatically runs the Awake function.*/
 		template <typename T, typename... A>
 		std::shared_ptr<T> addComponent(A... args)
 		{
 			std::shared_ptr<T> component = std::make_shared<T>();
 
-			if (component) //Check to see if the component is actually a component
+			if (component)
 			{
-				//Add component to the list if the component is of type component
 				component->entity = self;
 				component->began = false;
 				components.push_back(component);
 				component->Awake(args...);
 
-				std::cout << "yes freind" << std::endl;
-
 				return component;
 			}
 
-			//throw Oz::Exception("Added component isnt of type Component!"); //Throw engine exception if the added component isnt of the type component
 		}
 
-
+		/// get component.
+		/** This gets the component of the type that has been specified from this entity .
+		If there isnt one it will return a null pointer.*/
 		template<class T> std::shared_ptr<T> getComponent()
 		{
 			for (auto& comp : components)
@@ -51,26 +52,18 @@ namespace TEFGAS
 			}
 			return nullptr;
 		}
-		/*template <typename T>
-		std::shared_ptr<T> getComponent()
-		{
-			for (std::list<std::shared_ptr<Component>>::iterator it = components.begin(); it != components.end(); it++)
-			{
-				std::shared_ptr<T> component = std::dynamic_pointer_cast<T>(*it);
-
-				if (component) //Check if of correct type
-				{
-					return component; //Return that type
-				}
-				else
-				{
-
-				}
-			}
-		}*/
+		
+		/// Start.
+		/** this is called by the core once before the update / game loop begins.*/
 		void Start();
+		/// Update.
+		/** this is called by the core once every frame before rendering.*/
 		void Update();
+		/// Display.
+		/** This calls the Display fuction on the components on this entity.*/
 		void display();
+		/// Destructor.
+		/** This will call the Destructor on all of the components on this Entity.*/
 		~Entity();
 	private:
 		std::weak_ptr<Entity> self;

@@ -3,37 +3,30 @@
 
 void CameraController::Update()
 {
-	if (getCore()->state[SDL_SCANCODE_W])
+	if (getCore()->input->isKey('w'))
 	{
 		std::cout << "forward" << std::endl;
-		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + glm::vec3(0, 0, -0.5));
+		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + (getEntity()->getComponent<TEFGAS::Transform>()->getForward() * 0.5f));
 	}
-	if (getCore()->state[SDL_SCANCODE_S])
+	if (getCore()->input->isKey('s'))
 	{
 		std::cout << "back" << std::endl;
 
-		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + glm::vec3(0, 0, 0.5));
+		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + (getEntity()->getComponent<TEFGAS::Transform>()->getForward() * -0.5f));
 
 	}
-	if (getCore()->state[SDL_SCANCODE_A])
+	if (getCore()->input->isKey('a'))
 	{
 		std::cout << "left" << std::endl;
-		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + glm::vec3(-0.5, 0, 0));
+		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + (getEntity()->getComponent<TEFGAS::Transform>()->getRight() * -0.5f));
 	}
-	if (getCore()->state[SDL_SCANCODE_D])
+	if (getCore()->input->isKey('d'))
 	{
 		std::cout << "right" << std::endl;
-		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + glm::vec3(0.5, 0, 0));
+
+		getEntity()->getComponent<TEFGAS::Transform>()->setPosition(getEntity()->getComponent<TEFGAS::Transform>()->getPosition() + (getEntity()->getComponent<TEFGAS::Transform>()->getRight() * 0.5f));
 	}
-	if (getCore()->state[SDL_SCANCODE_LEFT])
-	{
-		std::cout << "turnLeft" << std::endl;
-		getEntity()->getComponent<TEFGAS::Transform>()->setRotation(getEntity()->getComponent<TEFGAS::Transform>()->getRotation() + glm::vec3(0, 0.2, 0));
-	}
-	if (getCore()->state[SDL_SCANCODE_RIGHT])
-	{
-		std::cout << "turnRight" << std::endl;
-		getEntity()->getComponent<TEFGAS::Transform>()->setRotation(getEntity()->getComponent<TEFGAS::Transform>()->getRotation() + glm::vec3(0, -0.2, 0));
-	}
+
+	getEntity()->getComponent<TEFGAS::Transform>()->setRotation(getEntity()->getComponent<TEFGAS::Transform>()->getRotation() + (-getEntity()->getComponent<TEFGAS::Transform>()->getUp() * (getCore()->input->getMouseMove().x * -1)));
 
 }

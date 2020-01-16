@@ -1,10 +1,10 @@
 #include "Component.h"
 #include "Entity.h"
+#include "Core.h"
 #include <iostream>
 
 namespace TEFGAS
 {
-
 	Component::~Component() {}
 	void Component::Awake() {}
 	void Component::Start() {}

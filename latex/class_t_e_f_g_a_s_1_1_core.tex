@@ -1,0 +1,115 @@
+\hypertarget{class_t_e_f_g_a_s_1_1_core}{}\doxysection{T\+E\+F\+G\+AS\+::Core Class Reference}
+\label{class_t_e_f_g_a_s_1_1_core}\index{TEFGAS::Core@{TEFGAS::Core}}
+
+
+{\ttfamily \#include $<$Core.\+h$>$}
+
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a62ab619635697b09ae71cdf8bff86aa8}{start}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_shader_program}{Shader\+Program}} $>$$>$ \+\_\+shaders)
+\item 
+void \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a1062a0c18068d88248d89f7724d03535}{stop}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}} $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_abeadc7fb4478f1022a526e74ef6bf364}{add\+Entity}} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core}{Core}} $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a5d7e4bfeb2d1ebf89922288c8fae9710}{initialize}} (int \+\_\+window\+Width, int \+\_\+window\+Height, std\+::string \+\_\+game\+Name)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const Uint8 $\ast$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a70bc9f48742b5a4d4bd5e27c0edf2534}{state}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_mesh}{Mesh}} $\ast$ $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_ae49640e3a67367c1ceda7c666db5f428}{Meshes}}
+\item 
+std\+::list$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}} $>$ $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a8520ac6da27805c15c31feadd87505b7}{entities}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_time}{Time}} $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_ada1426303fd0d7fe1aa4fa561d52de34}{time}}
+\item 
+S\+D\+L\+\_\+\+Window $\ast$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a0c66eca3a299270be02ba1591dca72ee}{window}} = nullptr
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_shader_program}{Shader\+Program}} $>$ $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_a98b8c7f1c45764bed832a625a6aa72f7}{shaders}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}} $>$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core_aed0da36b23d605b2e408a8ac0425a5de}{light}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_abeadc7fb4478f1022a526e74ef6bf364}\label{class_t_e_f_g_a_s_1_1_core_abeadc7fb4478f1022a526e74ef6bf364}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!addEntity@{addEntity}}
+\index{addEntity@{addEntity}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{addEntity()}{addEntity()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}} $>$ T\+E\+F\+G\+A\+S\+::\+Core\+::add\+Entity (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a5d7e4bfeb2d1ebf89922288c8fae9710}\label{class_t_e_f_g_a_s_1_1_core_a5d7e4bfeb2d1ebf89922288c8fae9710}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!initialize@{initialize}}
+\index{initialize@{initialize}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_core}{Core}} $>$ T\+E\+F\+G\+A\+S\+::\+Core\+::initialize (\begin{DoxyParamCaption}\item[{int}]{\+\_\+window\+Width,  }\item[{int}]{\+\_\+window\+Height,  }\item[{std\+::string}]{\+\_\+game\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a62ab619635697b09ae71cdf8bff86aa8}\label{class_t_e_f_g_a_s_1_1_core_a62ab619635697b09ae71cdf8bff86aa8}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!start@{start}}
+\index{start@{start}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily void T\+E\+F\+G\+A\+S\+::\+Core\+::start (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_t_e_f_g_a_s_1_1_shader_program}{Shader\+Program}} $>$$>$}]{\+\_\+shaders }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a1062a0c18068d88248d89f7724d03535}\label{class_t_e_f_g_a_s_1_1_core_a1062a0c18068d88248d89f7724d03535}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!stop@{stop}}
+\index{stop@{stop}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily void T\+E\+F\+G\+A\+S\+::\+Core\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a8520ac6da27805c15c31feadd87505b7}\label{class_t_e_f_g_a_s_1_1_core_a8520ac6da27805c15c31feadd87505b7}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!entities@{entities}}
+\index{entities@{entities}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{entities}{entities}}
+{\footnotesize\ttfamily std\+::list$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}}$>$ $>$ T\+E\+F\+G\+A\+S\+::\+Core\+::entities}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_aed0da36b23d605b2e408a8ac0425a5de}\label{class_t_e_f_g_a_s_1_1_core_aed0da36b23d605b2e408a8ac0425a5de}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!light@{light}}
+\index{light@{light}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{light}{light}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_t_e_f_g_a_s_1_1_entity}{Entity}}$>$ T\+E\+F\+G\+A\+S\+::\+Core\+::light}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_ae49640e3a67367c1ceda7c666db5f428}\label{class_t_e_f_g_a_s_1_1_core_ae49640e3a67367c1ceda7c666db5f428}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!Meshes@{Meshes}}
+\index{Meshes@{Meshes}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{Meshes}{Meshes}}
+{\footnotesize\ttfamily std\+::vector$<$\mbox{\hyperlink{class_t_e_f_g_a_s_1_1_mesh}{Mesh}}$\ast$$>$ T\+E\+F\+G\+A\+S\+::\+Core\+::\+Meshes}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a98b8c7f1c45764bed832a625a6aa72f7}\label{class_t_e_f_g_a_s_1_1_core_a98b8c7f1c45764bed832a625a6aa72f7}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!shaders@{shaders}}
+\index{shaders@{shaders}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{shaders}{shaders}}
+{\footnotesize\ttfamily std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_t_e_f_g_a_s_1_1_shader_program}{Shader\+Program}}$>$ $>$ T\+E\+F\+G\+A\+S\+::\+Core\+::shaders}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a70bc9f48742b5a4d4bd5e27c0edf2534}\label{class_t_e_f_g_a_s_1_1_core_a70bc9f48742b5a4d4bd5e27c0edf2534}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!state@{state}}
+\index{state@{state}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{state}{state}}
+{\footnotesize\ttfamily const Uint8$\ast$ T\+E\+F\+G\+A\+S\+::\+Core\+::state}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_ada1426303fd0d7fe1aa4fa561d52de34}\label{class_t_e_f_g_a_s_1_1_core_ada1426303fd0d7fe1aa4fa561d52de34}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!time@{time}}
+\index{time@{time}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{time}{time}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{class_t_e_f_g_a_s_1_1_time}{Time}}$>$ T\+E\+F\+G\+A\+S\+::\+Core\+::time}
+
+\mbox{\Hypertarget{class_t_e_f_g_a_s_1_1_core_a0c66eca3a299270be02ba1591dca72ee}\label{class_t_e_f_g_a_s_1_1_core_a0c66eca3a299270be02ba1591dca72ee}} 
+\index{TEFGAS::Core@{TEFGAS::Core}!window@{window}}
+\index{window@{window}!TEFGAS::Core@{TEFGAS::Core}}
+\doxysubsubsection{\texorpdfstring{window}{window}}
+{\footnotesize\ttfamily S\+D\+L\+\_\+\+Window$\ast$ T\+E\+F\+G\+A\+S\+::\+Core\+::window = nullptr}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+src/\+Engine/\mbox{\hyperlink{_core_8h}{Core.\+h}}\item 
+src/\+Engine/\mbox{\hyperlink{_core_8cpp}{Core.\+cpp}}\end{DoxyCompactItemize}

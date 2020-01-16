@@ -10,13 +10,11 @@ add_library(TEFGAS
  	src/Engine/Core.cpp
  	src/Engine/Entity.cpp
  	src/Engine/Component.cpp
-	src/Engine/Keyboard.cpp
+	src/Engine/Input.cpp
 	src/Engine/Environment.cpp
     src/Engine/ShaderProgram.cpp
     src/Engine/VertexBuffer.cpp
     src/Engine/VertexArray.cpp
-	src/Engine/RenderTexture.cpp
-	src/Engine/RenderComponent.cpp
 	src/Engine/Exception.cpp
 	src/Engine/Mesh.cpp
 	src/Engine/Texture.cpp

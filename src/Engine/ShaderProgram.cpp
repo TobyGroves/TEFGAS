@@ -2,7 +2,6 @@
 #include "VertexBuffer.h"
 #include "VertexArray.h"
 #include "Texture.h"
-#include "RenderTexture.h"
 
 #include <glm/ext.hpp>
 
@@ -149,35 +148,6 @@ namespace TEFGAS
 		glUseProgram(0);
 	}
 
-	void ShaderProgram::draw(RenderTexture * renderTexture, VertexArray * vertexArray)
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, renderTexture->getFbId());
-		glm::vec4 lastViewport = viewport;
-		viewport = glm::vec4(0, 0, renderTexture->getSize().x, renderTexture->getSize().y);
-		draw(vertexArray);
-		viewport = lastViewport;
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-
-	void ShaderProgram::draw(std::shared_ptr<RenderTexture>renderTexture, VertexArray * vertexArray)
-	{
-		glBindFramebuffer(GL_FRAMEBUFFER, renderTexture->getFbId());
-		glm::vec4 lastViewport = viewport;
-		viewport = glm::vec4(0, 0, renderTexture->getSize().x, renderTexture->getSize().y);
-		draw(vertexArray);
-		viewport = lastViewport;
-		glBindFramebuffer(GL_FRAMEBUFFER, 0);
-	}
-
-	void ShaderProgram::draw(RenderTexture * renderTexture)
-	{
-		draw(renderTexture, simpleShape);
-	}
-
-	void ShaderProgram::draw(std::shared_ptr<RenderTexture> renderTexture)
-	{
-		draw(renderTexture.get(), simpleShape);
-	}
 
 	void ShaderProgram::draw()
 	{

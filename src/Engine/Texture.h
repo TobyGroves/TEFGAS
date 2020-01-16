@@ -7,20 +7,24 @@
 #include <string>
 namespace TEFGAS
 {
-	class RenderTexture;
-
+	/// Texture Class.
+	/** This class stores the relevant information about a texture aswell as loading and setting it up in opengl. */
 	class Texture
 	{
-		friend class RenderTexture;
 
 		GLuint id;
 		glm::vec2 size;
-
 		Texture(int width, int height);
 
 	public:
+		/// Constructor.
+		/** This takes the path of the texture. */
 		Texture(std::string path);
+		/// Get Size.
+		/** Returns the size of the texture. */
 		glm::vec2 getSize();
+		/// GetId.
+		/** This returns the opengl ID of the texture. */
 		GLuint getId();
 
 	};

@@ -33,6 +33,8 @@ namespace TEFGAS
 		SourceID = 0;
 		alGenSources(1, &SourceID);
 
+		//TODO add gain I think its the volume 
+
 		alSource3f(SourceID, AL_POSITION, 0.0f, 0.0f, 0.0f);
 		alSourcei(SourceID, AL_BUFFER, BufferID);
 		alSourcePlay(SourceID);
@@ -53,13 +55,6 @@ namespace TEFGAS
 		{
 			alDeleteSources(1, &SourceID);
 		}
-	}
-
-	void Sound::Start()
-	{
-		std::cout << "we here" << std::endl;
-
-		play();
 	}
 
 	void Sound::load_ogg(const std::string& fileName, std::vector<char>& buffer,

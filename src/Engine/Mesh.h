@@ -9,22 +9,20 @@ namespace TEFGAS
 	class Texture;
 	class VertexArray;
 	class VertexBuffer;
-	class RenderTexture;
 	class Material;
 
 	class Mesh : public Component
 	{
 	public:
-		//Mesh(Texture* _texture, Texture* _normalMap, VertexArray* _mesh, Transform* _transform, float _shine, std::shared_ptr<ShaderProgram> _shader);
-		//Mesh(std::shared_ptr <Material> _material, VertexArray* _mesh);
 
 		std::shared_ptr <Transform> transform;
 
-		std::string tag;
-
+		///Awake
+		/** Awake initializes the mesh and takes a material and a vertex array*/
 		void Awake(std::shared_ptr <Material> _material, VertexArray* _mesh);
+		/// Display.
+		/** This is the function that draws the mesh to the screen.*/
 		void onDisplay();
-		void draw(std::shared_ptr<RenderTexture> rendTex);
 		VertexArray* mesh;
 	private:
 		std::shared_ptr<ShaderProgram> shader;
